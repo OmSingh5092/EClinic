@@ -161,11 +161,11 @@ const doctorSignIn = async (req,res)=>{
     }else{
         var auth_data = {
             email: user.email,
-            id: user.id,
+            id: user.doctor_id,
             created_at: user.created_at
         }
         // Create and assign an auth-token
-        const TOKEN_SECRET = config.app.jwtKey
+        const TOKEN_SECRET = config.jwt.jwtKey
         var token = jwt.sign(auth_data, TOKEN_SECRET);
         // console.log(user)
         // console.log('Already exists.')

@@ -20,9 +20,35 @@ const appointment = sequelize.define('appointment',{
     //Status
     status:{
         type:Sequelize.BOOLEAN,
-    }
+    },
 
     //Payment Status
+
+    payment_status:{
+        type:Sequelize.BOOLEAN,
+    },
+
+    //New Prescription
+    new_prescription_path:{
+        type:Sequelize.TEXT,
+    },
+
+    //Interaction method
+
+    interaction_method:{
+        type:Sequelize.TEXT,
+    },
+
+    //Appointment Schedule date
+    date:{
+        type:Sequelize.DATE
+    },
+
+    //Priority
+
+    priority:{
+        type:Sequelize.INTEGER
+    }
 
 })
 
