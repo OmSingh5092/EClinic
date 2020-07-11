@@ -12,7 +12,6 @@ const doctor = sequelize.define('doctor',{
     //Contact Details
     phone_number:{
         type:Sequelize.TEXT,
-        allowNull:false,
     },
     email:{
         type:Sequelize.TEXT,
@@ -26,21 +25,17 @@ const doctor = sequelize.define('doctor',{
     },
     registration_number:{
         type:Sequelize.TEXT,
-        allowNull:false,
     },
     year_of_registration:{
         type:Sequelize.TEXT,
-        allowNull:false,
     },
     state_medical_council:{
         type:Sequelize.TEXT,
-        allowNull:false,
     },
 
     //Profile Photo
     photo_path:{
         type:Sequelize.TEXT,
-        allowNull:true,
     },
 
     created_at: {
