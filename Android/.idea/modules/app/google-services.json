@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1082616611415",
+    "firebase_url": "https://eclinic-c0e9a.firebaseio.com",
+    "project_id": "eclinic-c0e9a",
+    "storage_bucket": "eclinic-c0e9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082616611415:android:2bbda8d1ee90ac26d9d912",
+        "android_client_info": {
+          "package_name": "com.example.eclinic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082616611415-sftardirsj7urncvbph8jmpi9gp89dv1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.eclinic",
+            "certificate_hash": "7268adab26487ffb5a5e506e2db0a30edbcb5865"
+          }
+        },
+        {
+          "client_id": "1082616611415-ua1it4bmvm8jhbf7g8knrg1mtpf7t8td.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA42hdn8oaKlmjlStCAGu_sT6N--ah_vtg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082616611415-ua1it4bmvm8jhbf7g8knrg1mtpf7t8td.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

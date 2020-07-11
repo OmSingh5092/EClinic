@@ -42,7 +42,15 @@ const patient = sequelize.define('patient',{
     photo_path:{
         type:Sequelize.TEXT,
         allowNull:true,
-    }
+    },
+
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    updated_at: DataTypes.DATE,
+    deleted_at: DataTypes.DATE
 
 })
 

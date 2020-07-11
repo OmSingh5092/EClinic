@@ -19,14 +19,22 @@ const sequelize = new Sequelize(
         },  */
         operatorAliases: false,
         // socketPath : env.SOCKET_PATH,
-        dialectOptions: env.DIALECT_OPTIONS
+        dialectOptions: config.DIALECT_OPTIONS
         //  logging: false
     }
 )
+module.exports=sequelize;
+
+//Adding models
+
+require('./models/doctor')
+require('./models/appointment');
+require('./models/patient');
 
 sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
+}).catch((err)=>{
+    console.log(err);
 })
 
-module.exports=sequelize;
