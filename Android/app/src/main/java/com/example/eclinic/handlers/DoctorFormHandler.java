@@ -10,9 +10,13 @@ import android.os.Environment;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.eclinic.apiControllers.DoctorProfileController;
 import com.example.eclinic.apiControllers.PatientProfileController;
+import com.example.eclinic.apiModel.Doctor;
+import com.example.eclinic.apiModel.DoctorUpdateResponseModel;
 import com.example.eclinic.apiModel.Patient;
 import com.example.eclinic.apiModel.PatientUpdateResponseModel;
+import com.example.eclinic.databinding.LayoutDoctorFormBinding;
 import com.example.eclinic.databinding.LayoutPatientFormBinding;
 import com.example.eclinic.utils.SharedPrefs;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -20,7 +24,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.UploadTask;
 import com.yalantis.ucrop.UCrop;
 
@@ -35,28 +38,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PatientFormHandler {
+public class DoctorFormHandler {
+
     private FormHandler handler;
-    private LayoutPatientFormBinding binding;
+    private LayoutDoctorFormBinding binding;
     private Context context;
     SharedPrefs prefs;
     Activity activity;
-    Patient patient;
+    Doctor doctor;
 
     Bitmap profileImage;
     FirebaseStorage storage;
     FirebaseAuth auth;
 
-    String name,phone,blood,gender,weight,profilePath;
+    String name,phone,registration,year,council,profilePath;
 
-    public PatientFormHandler(FormHandler handler, LayoutPatientFormBinding binding) {
+    public DoctorFormHandler(FormHandler handler, LayoutDoctorFormBinding binding) {
         this.handler = handler;
         this.binding = binding;
         context = (Context)handler;
         activity = (Activity)handler;
         prefs = new SharedPrefs(context);
         auth = FirebaseAuth.getInstance();
-        patient = new Patient();
+        doctor = new Doctor();
 
         storage = FirebaseStorage.getInstance();
 
@@ -94,7 +98,7 @@ public class PatientFormHandler {
         profileImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
         final UploadTask uploadTask = storage.getReference()
-                .child("patient")
+                .child("doctor")
                 .child("profile")
                 .child(auth.getUid())
                 .putBytes(data);
@@ -168,23 +172,23 @@ public class PatientFormHandler {
             return;
         }
 
-        patient.setPatientName(name);
-        patient.setBlood(blood);
-        patient.setPhoneNumber(phone);
-        patient.setWeight(Integer.valueOf(weight));
-        patient.setGender(gender);
-        patient.setPhotoPath(profilePath);
+        doctor.setDoctorName(name);
+        doctor.setRegistrationNumber(registration);
+        doctor.setStateMedicalCouncil(council);
+        doctor.setYearOfRegistration(year);
+        doctor.setPhotoPath(profilePath);
+        doctor.setPhoneNumber(phone);
 
-        PatientProfileController.updateProfile(patient, prefs.getToken(), new Callback<PatientUpdateResponseModel>() {
+        DoctorProfileController.updateDoctor(doctor, prefs.getToken(), new Callback<DoctorUpdateResponseModel>() {
             @Override
-            public void onResponse(Call<PatientUpdateResponseModel> call, Response<PatientUpdateResponseModel> response) {
+            public void onResponse(Call<DoctorUpdateResponseModel> call, Response<DoctorUpdateResponseModel> response) {
                 if(response.isSuccessful()){
                     handler.onFormSubmitted();
                 }
             }
 
             @Override
-            public void onFailure(Call<PatientUpdateResponseModel> call, Throwable t) {
+            public void onFailure(Call<DoctorUpdateResponseModel> call, Throwable t) {
 
             }
         });
@@ -197,9 +201,9 @@ public class PatientFormHandler {
     private void initText(){
         name = binding.name.getText().toString();
         phone = binding.phone.getText().toString();
-        blood = binding.blood.getText().toString();
-        gender = binding.gender.getText().toString();
-        weight = binding.weight.getText().toString();
+        registration = binding.registrationNumber.getText().toString();
+        council = binding.stateMedicalCouncil.getText().toString();
+        year = binding.yearOfRegistration.getText().toString();
     }
 
     boolean isFilled(){
@@ -209,11 +213,14 @@ public class PatientFormHandler {
         }else if(phone == null){
             Toast.makeText(context, "Please enter a phone number", Toast.LENGTH_SHORT).show();
             return false;
-        }else if(gender == null){
+        }else if(registration == null){
             Toast.makeText(context, "Please enter a gender", Toast.LENGTH_SHORT).show();
             return false;
-        }else if(weight == null){
+        }else if(council == null){
             Toast.makeText(context, "Please enter a weight", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(year == null){
+            Toast.makeText(context, "Please enter an year", Toast.LENGTH_SHORT).show();
             return false;
         }
 

@@ -23,6 +23,7 @@ public class PatientProfileController {
         body.put("blood",patient.getBlood());
         body.put("gender",patient.getGender());
         body.put("weight",String.valueOf(patient.getWeight()));
+        body.put("photo_path",patient.getPhotoPath());
 
         Call<PatientUpdateResponseModel> call = RetrofitClient.getClient().updatePatient(token,body);
         call.enqueue(callback);
