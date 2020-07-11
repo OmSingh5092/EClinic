@@ -17,6 +17,7 @@ const googleLogin = require('./routes/googleLogin')
 
 app.use("/api/google",googleLogin);
 app.use("/api/patient",patientRouter);
+app.use("/api/appointment",appointmentRouter)
 
 //Listening 
 

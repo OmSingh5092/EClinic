@@ -20,3 +20,7 @@ module.exports.getDoctorProfile = (req,res)=>{
         })
     })
 }
+
+module.exports.updateDoctorProfile = (req,res)=>{
+    
+}
