@@ -8,5 +8,6 @@ const validate = require('../middlewares/validate').appointmentValidation;
 
 router.post('/add',userVerification ,validate,controller.addAppointment);
 router.get('/get',userVerification ,controller.getAppointment)
+router.delete('/delete',userVerification,controller.deleteAppointment);
 
 module.exports = router;

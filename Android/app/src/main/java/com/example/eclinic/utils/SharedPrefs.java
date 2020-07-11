@@ -9,6 +9,7 @@ public class SharedPrefs {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     private String email = "email", name = "name", token = "token", newUser = "newUser";
+    private boolean isPatient;
 
     @SuppressLint("CommitPrefEdits")
     public SharedPrefs(Context context) {
@@ -49,6 +50,14 @@ public class SharedPrefs {
 
     public void saveNewUser(boolean key){
         editor.putBoolean(newUser, key);
+        editor.commit();
+    }
+
+    public boolean getUserType(){
+        return sharedPreferences.getBoolean("isPatient",true);
+    }
+    public void setUserType(boolean key){
+        editor.putBoolean("isPatient",key);
         editor.commit();
     }
 

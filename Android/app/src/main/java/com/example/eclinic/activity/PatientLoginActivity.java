@@ -117,6 +117,7 @@ public class PatientLoginActivity extends AppCompatActivity implements  GoogleAp
                             prefs.saveName(account.getDisplayName());
                             prefs.saveToken(tokenModel.getAuthToken());
                             prefs.saveNewUser(tokenModel.isNewUser());
+                            prefs.setUserType(true);
                             AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
                             firebaseAuthWithGoogle(credential);
                         }else{

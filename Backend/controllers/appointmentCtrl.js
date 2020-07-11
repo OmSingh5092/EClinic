@@ -23,7 +23,7 @@ module.exports.getAppointment = (req,res)=>{
 
 module.exports.addAppointment = (req,res)=>{
     const id = req.user.id;
-    //Here is is the patient's id
+    //Here id is the patient's id
     const appointment = req.body.appointment;
     appointment.patient_id = id;
 
@@ -34,9 +34,31 @@ module.exports.addAppointment = (req,res)=>{
             appointment:appointmentData
         })
     }).catch((err)=>{
+        console.log(err);
         return res.status(500).json({
             success:false,
             msg:"Internal Server Error",
+        })
+    })
+}
+
+module.exports.deleteAppointment = (req,res)=>{
+    const id = req.user.id;
+    //Here the id is the patient's id
+
+    const appointmentId = req.body.appointment_id;
+
+    return table.destroy({where:{appointment_id :appointmentId}})
+    .then(()=>{
+        res.status(200).json({
+            success:true,
+            msg:"Appointment successfully deleted"
+        })
+    }).catch((err)=>{
+        console.log(err);
+        res.status(500).json({
+            success:false,
+            msg:"Internal server error"
         })
     })
 }
