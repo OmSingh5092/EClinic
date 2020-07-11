@@ -17,11 +17,10 @@ const patient = sequelize.define('patient',{
     //Contact Details
     phone_number:{
         type:Sequelize.TEXT,
-        allowNull:false,
     },
     email:{
         type:Sequelize.TEXT,
-        allowNull:false
+        allowNull:false,
     },
 
     //Medical Details
@@ -45,12 +44,12 @@ const patient = sequelize.define('patient',{
     },
 
     created_at: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false,
         defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
-    updated_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    updated_at: Sequelize.DATE,
+    deleted_at: Sequelize.DATE
 
 })
 

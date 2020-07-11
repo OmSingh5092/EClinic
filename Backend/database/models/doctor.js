@@ -44,12 +44,12 @@ const doctor = sequelize.define('doctor',{
     },
 
     created_at: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false,
         defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
-    updated_at: DataTypes.DATE,
-    deleted_at: DataTypes.DATE
+    updated_at: Sequelize.DATE,
+    deleted_at: Sequelize.DATE
 
 })
 

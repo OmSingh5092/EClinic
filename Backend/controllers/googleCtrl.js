@@ -2,13 +2,19 @@ const { OAuth2Client } = require('google-auth-library');
 const jwt = require('jsonwebtoken');
 
 const patientTable = require('../database/models/patient')
-const doctorTable = require('../data')
 
 const config = require('../config')
 
 const patientSignIn = async (req,res)=>{
     const idToken = req.body.idToken;
     const client = new OAuth2Client(config.gcp.clientId);
+
+    if(idToken == null){
+        return res.json({
+            success:false,
+            message:"Token not found"
+        })
+    }
     
     const ticket = await client.verifyIdToken({
         idToken:idToken,
@@ -26,12 +32,7 @@ const patientSignIn = async (req,res)=>{
         attributes: ['patient_id', 'patient_name', 'email']
     })
 
-    if(idToken == null){
-        return res.json({
-            success:false,
-            message:"Token not found"
-        })
-    }
+    
 
     if(!user){
         var create_object = {

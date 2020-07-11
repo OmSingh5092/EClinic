@@ -12,9 +12,6 @@ const doctorRouter = require('./routes/doctor');
 const patientRouter = require('./routes/patient');
 const googleLogin = require('./routes/googleLogin')
 
-app.use("/api/doctor",doctorRouter);
-app.use("/api/patient",patientRouter);
-app.use("/api/appointment",appointmentRouter);
 app.use("/api/google",googleLogin);
 
 //Listening 
