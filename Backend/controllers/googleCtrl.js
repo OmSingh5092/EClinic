@@ -47,7 +47,7 @@ const patientSignIn = async (req,res)=>{
             console.log("LOGIN DATA: ", login_data)
             var auth_data = {
                 email: login_data.email,
-                id: login_data.id,
+                id: login_data.patient_id,
                 created_at: login_data.created_at
             };
             // Create and assign an auth-token
@@ -74,11 +74,11 @@ const patientSignIn = async (req,res)=>{
     }else{
         var auth_data = {
             email: user.email,
-            id: user.id,
+            id: user.patient_id,
             created_at: user.created_at
         }
         // Create and assign an auth-token
-        const TOKEN_SECRET = config.app.jwtKey
+        const TOKEN_SECRET = config.jwt.jwtKey;
         var token = jwt.sign(auth_data, TOKEN_SECRET);
         // console.log(user)
         // console.log('Already exists.')
@@ -134,7 +134,7 @@ const doctorSignIn = async (req,res)=>{
             console.log("LOGIN DATA: ", login_data)
             var auth_data = {
                 email: login_data.email,
-                id: login_data.id,
+                id: login_data.doctor_id,
                 created_at: login_data.created_at
             };
             // Create and assign an auth-token

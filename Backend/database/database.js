@@ -31,10 +31,10 @@ require('./models/doctor')
 require('./models/appointment');
 require('./models/patient');
 
-sequelize.sync({ force: true })
+/*sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
 }).catch((err)=>{
     console.log(err);
-})
+})  */
 

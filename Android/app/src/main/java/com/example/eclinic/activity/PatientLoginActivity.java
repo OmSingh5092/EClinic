@@ -112,6 +112,7 @@ public class PatientLoginActivity extends AppCompatActivity implements  GoogleAp
                     if(response.isSuccessful() && response.code() == 200){
                         TokenResponseModel tokenModel = response.body();
                         if(tokenModel.isSuccess()) {
+                            Log.i("JWT",tokenModel.getAuthToken());
                             prefs.saveEmail(account.getEmail());
                             prefs.saveName(account.getDisplayName());
                             prefs.saveToken(tokenModel.getAuthToken());
