@@ -6,3 +6,6 @@ Patients have to book an online appointment and the doctors will confirm the app
 For the appointment the patient can share his previous prescription which helps doctor have a good outlook about patient’s medical history.
 After the interaction the doctor will upload a new prescription for the patient.
 
+## For better understandig of the project refer the presentation
+https://docs.google.com/presentation/d/1wtJz_q4q-wTtVN6wSnmYf9-UMJryxv5MZgBaX3RN-5o/edit?usp=sharing
+
