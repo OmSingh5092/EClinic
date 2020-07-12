@@ -80,41 +80,34 @@ public class PatientFormHandler {
             InputStream inputStream = new FileInputStream(file);
             profileImage = BitmapFactory.decodeStream(inputStream);
             binding.image.setImageBitmap(profileImage);
-            uploadImage();
+            uploadImage(imageUri);
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    void uploadImage(){
+    void uploadImage(Uri uri){
         final Snackbar snackbar = Snackbar.make(binding.getRoot(),"Uploading Image...",Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
-
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        profileImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
-        final UploadTask uploadTask = storage.getReference()
+        storage.getReference()
                 .child("patient")
                 .child("profile")
-                .child(auth.getUid())
-                .putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
+                .child(auth.getUid()).child("image.jpg").putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        snackbar.dismiss();
+                        Toast.makeText(context, "Upload Successful", Toast.LENGTH_SHORT).show();
+                        snackbar.dismiss();
+                        profilePath = "patient/profile/"+auth.getUid()+"/image.jpg";
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception exception) {
+            public void onFailure(@NonNull Exception e) {
                 snackbar.dismiss();
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                snackbar.dismiss();
-                Toast.makeText(context, "Upload Successful", Toast.LENGTH_SHORT).show();
-                snackbar.dismiss();
-                profilePath = auth.getUid();
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
             }
         });
+
     }
 
     private void openCropActivity(Uri sourceUri, Uri destinationUri) {
@@ -191,8 +184,6 @@ public class PatientFormHandler {
 
 
     }
-
-
 
     private void initText(){
         name = binding.name.getText().toString();

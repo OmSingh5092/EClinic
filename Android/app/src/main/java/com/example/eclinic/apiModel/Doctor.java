@@ -33,6 +33,41 @@ public class Doctor {
     @Expose
     String photoPath;
 
+    @SerializedName("category")
+    @Expose
+    String category;
+
+    @SerializedName("fees_priority")
+    @Expose
+    String feesPriority;
+    @SerializedName("fees_genera")
+    @Expose
+    String feesGeneral;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getFeesPriority() {
+        return feesPriority;
+    }
+
+    public void setFeesPriority(String feesPriority) {
+        this.feesPriority = feesPriority;
+    }
+
+    public String getFeesGeneral() {
+        return feesGeneral;
+    }
+
+    public void setFeesGeneral(String feesGeneral) {
+        this.feesGeneral = feesGeneral;
+    }
+
     @SerializedName("created_at")
     @Expose
     String createdAt;

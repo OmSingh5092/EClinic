@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">EClinic</string>
     <string name="web_client_id">541374752269-86ein6vehn2elteuea39arj5nnaok92o.apps.googleusercontent.com</string>
+
+    <string-array name="doctor_category">
+        <item>Dental</item>
+        <item>Heart</item>
+        <item>Eye</item>
+    </string-array>
 </resources>

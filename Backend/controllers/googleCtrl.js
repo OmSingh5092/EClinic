@@ -117,7 +117,7 @@ const doctorSignIn = async (req,res)=>{
         where:{
             email:userEmail
         },
-        attributes: ['patient_id', 'patient_name', 'email']
+        attributes: ['doctor_id', 'doctor_name', 'email']
     })
 
     
@@ -128,7 +128,7 @@ const doctorSignIn = async (req,res)=>{
             doctor_name: userName
         };
         
-        patientTable.create(create_object)
+        doctorTable.create(create_object)
         .then(login_data => {
             // The payload of the auth-token
             console.log("LOGIN DATA: ", login_data)

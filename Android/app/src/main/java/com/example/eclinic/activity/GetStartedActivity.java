@@ -111,7 +111,12 @@ public class GetStartedActivity extends AppCompatActivity implements  GoogleApiC
             // you can store user data to SharedPreference
             Map<String,String> body = new HashMap<>();
             body.put("idToken",account.getIdToken());
-            Call<TokenResponseModel> call = RetrofitClient.getClient().getPatientToken(body);
+            Call<TokenResponseModel> call;
+            if(isPatient){
+                call = RetrofitClient.getClient().getPatientToken(body);
+            }else{
+                call = RetrofitClient.getClient().getDoctorToken(body);
+            }
             call.enqueue(new Callback<TokenResponseModel>() {
                 @Override
                 public void onResponse(Call<TokenResponseModel> call, Response<TokenResponseModel> response) {

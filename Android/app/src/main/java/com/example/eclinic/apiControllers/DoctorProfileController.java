@@ -23,6 +23,7 @@ public class DoctorProfileController {
         body.put("year_of_registration",doctor.getYearOfRegistration());
         body.put("state_medical_council",doctor.getStateMedicalCouncil());
         body.put("photo_path",doctor.getPhotoPath());
+        body.put("category",doctor.getCategory());
 
         Call<DoctorUpdateResponseModel> call = RetrofitClient.getClient().updateDoctor(token,body);
         call.enqueue(callback);

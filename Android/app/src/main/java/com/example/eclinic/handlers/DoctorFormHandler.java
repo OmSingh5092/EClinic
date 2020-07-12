@@ -7,9 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.eclinic.R;
 import com.example.eclinic.apiControllers.DoctorProfileController;
 import com.example.eclinic.apiControllers.PatientProfileController;
 import com.example.eclinic.apiModel.Doctor;
@@ -51,7 +54,7 @@ public class DoctorFormHandler {
     FirebaseStorage storage;
     FirebaseAuth auth;
 
-    String name,phone,registration,year,council,profilePath;
+    String name,phone,registration,year,council,profilePath,category;
 
     public DoctorFormHandler(FormHandler handler, LayoutDoctorFormBinding binding) {
         this.handler = handler;
@@ -84,39 +87,32 @@ public class DoctorFormHandler {
             InputStream inputStream = new FileInputStream(file);
             profileImage = BitmapFactory.decodeStream(inputStream);
             binding.image.setImageBitmap(profileImage);
-            uploadImage();
+            uploadImage(imageUri);
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    void uploadImage(){
+    void uploadImage(Uri uri){
         final Snackbar snackbar = Snackbar.make(binding.getRoot(),"Uploading Image...",Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        profileImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
-        final UploadTask uploadTask = storage.getReference()
+        storage.getReference()
                 .child("doctor")
                 .child("profile")
-                .child(auth.getUid())
-                .putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
+                .child(auth.getUid()).child("image.jpg").putFile(uri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        snackbar.dismiss();
+                        Toast.makeText(context, "Upload Successful", Toast.LENGTH_SHORT).show();
+                        snackbar.dismiss();
+                        profilePath = "doctor/profile/"+auth.getUid()+"/image.jpg";
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onFailure(@NonNull Exception exception) {
+            public void onFailure(@NonNull Exception e) {
                 snackbar.dismiss();
-                // Handle unsuccessful uploads
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                snackbar.dismiss();
-                Toast.makeText(context, "Upload Successful", Toast.LENGTH_SHORT).show();
-                snackbar.dismiss();
-                profilePath = auth.getUid();
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                // ...
             }
         });
     }
@@ -146,7 +142,12 @@ public class DoctorFormHandler {
 
 
     public void initialize(){
-
+        binding.category.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initCategoryPopOver();
+            }
+        });
         binding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,6 +179,7 @@ public class DoctorFormHandler {
         doctor.setYearOfRegistration(year);
         doctor.setPhotoPath(profilePath);
         doctor.setPhoneNumber(phone);
+        doctor.setCategory(category);
 
         DoctorProfileController.updateDoctor(doctor, prefs.getToken(), new Callback<DoctorUpdateResponseModel>() {
             @Override
@@ -225,5 +227,25 @@ public class DoctorFormHandler {
         }
 
         return true;
+    }
+
+
+    private void initCategoryPopOver(){
+        PopupMenu menu = new PopupMenu(context, binding.category);
+        int id = 0;
+        String[] categoryList = context.getResources().getStringArray(R.array.doctor_category);
+        for(String string: categoryList){
+            menu.getMenu().add(100,id,id,string);
+        }
+
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                category = categoryList[menuItem.getItemId()];
+                return false;
+            }
+        });
+
+        menu.show();
     }
 }

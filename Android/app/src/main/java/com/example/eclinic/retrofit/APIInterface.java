@@ -9,6 +9,7 @@ import com.example.eclinic.apiModel.TokenResponseModel;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -23,13 +24,8 @@ public interface APIInterface {
     @POST("google/patient")
     Call<TokenResponseModel> getPatientToken(@Body Map<String,String> body);
 
-    @FormUrlEncoded
     @POST("google/doctor")
-    @Headers({
-            "Accept: application/json",
-            "Content-Type: application/x-www-form-urlencoded"
-    })
-    Call<TokenResponseModel> getDoctorToken(@Field("idToken") String token);
+    Call<TokenResponseModel> getDoctorToken(@Body Map<String,String> body);
 
     @POST("patient/update")
     Call<PatientUpdateResponseModel> updatePatient(@Header("token") String token, @Body Map<String,String> body);

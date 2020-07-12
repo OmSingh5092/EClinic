@@ -38,6 +38,20 @@ const doctor = sequelize.define('doctor',{
         type:Sequelize.TEXT,
     },
 
+    //Category
+    category:{
+        type:Sequelize.TEXT
+    },
+
+    //Fees
+    fees_priority:{
+        type:Sequelize.INTEGER,
+    },
+
+    fees_general:{
+        type:Sequelize.INTEGER,
+    },
+
     created_at: {
         type: Sequelize.DATE,
         allowNull: false,
