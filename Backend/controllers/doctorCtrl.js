@@ -25,13 +25,13 @@ module.exports.getDoctorProfile = (req,res)=>{
 module.exports.getAllDoctorProfile=(req,res)=>{
     return table.findAll()
     .then((data)=>{
-        return res.status(500).json({
+        return res.status(200).json({
             success:true,
             data:data,
         })
     }).catch((err)=>{
         console.log(err);
-        res.status(200).json({
+        res.status(500).json({
             success:false,
             msg:"Internal Server Error",
         })

@@ -1,10 +1,13 @@
 package com.example.eclinic.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.eclinic.activity.CategoryActivity;
 import com.example.eclinic.databinding.RecyclerCategoriesBinding;
 
 import java.util.List;
@@ -31,7 +34,7 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.text.setText(data.get(position));
     }
 
     @Override
@@ -40,9 +43,20 @@ public class CategoryRecyclerAdapter extends RecyclerView.Adapter<CategoryRecycl
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView text;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            text =binding.category;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, CategoryActivity.class);
+                    i.putExtra("category",data.get(getAdapterPosition()));
+                    context.startActivity(i);
+                }
+            });
         }
     }
 }

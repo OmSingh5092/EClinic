@@ -4,9 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.eclinic.apiModel.Doctor;
 import com.example.eclinic.databinding.RecyclerDoctorsBinding;
+import com.example.eclinic.utils.ImageDownloader;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -32,18 +37,26 @@ public class DoctorRecyclerAdapter extends RecyclerView.Adapter<DoctorRecyclerAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.name.setText(data.get(position).getDoctorName());
+        holder.category.setText(data.get(position).getCategory());
 
+        new ImageDownloader(holder.imageView,data.get(position).getPhotoPath(),context);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
+        ImageView imageView;
+        TextView name,category;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imageView = binding.image;
+            name = binding.doctorName;
+            category = binding.doctorCategory;
+
         }
     }
 }
