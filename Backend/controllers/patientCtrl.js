@@ -23,6 +23,22 @@ module.exports.getPatientProfile = (req,res)=>{
     })
 }
 
+module.exports.getAllProfile = (req,res)=>{
+    return table.findAll()
+        .then((data)=>{
+            return res.status(200).json({
+                success:true,
+                data:data,
+            })
+        }).catch((err)=>{
+            console.log(err);
+            res.status(500).json({
+                success:false,
+                msg:"Internal Server Error",
+            })
+        })
+}
+
 module.exports.updatePatientProfile = (req,res)=>{
     const id = req.user.id;
     const update = req.body;

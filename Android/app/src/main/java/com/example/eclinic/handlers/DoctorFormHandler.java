@@ -142,9 +142,9 @@ public class DoctorFormHandler {
 
 
     public void initialize(){
-        binding.category.setOnClickListener(new View.OnClickListener() {
+        binding.category.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
+            public void onFocusChange(View view, boolean b) {
                 initCategoryPopOver();
             }
         });
@@ -247,6 +247,7 @@ public class DoctorFormHandler {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 category = categoryList[menuItem.getItemId()];
+                binding.category.setText(category);
                 return false;
             }
         });

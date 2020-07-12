@@ -41,12 +41,17 @@ public class PendingAppointments extends AppCompatActivity {
 
     }
 
+
     void loadData(){
         AppointmentController.getAppointment(prefs.getToken(), new Callback<AppointmentGetResponseModel>() {
             @Override
             public void onResponse(Call<AppointmentGetResponseModel> call, Response<AppointmentGetResponseModel> response) {
                 if(response.isSuccessful()){
-                    appointmentList = response.body().getAppointments();
+                    for(Appointment appointment:response.body().getAppointments()){
+                        if(!appointment.isStatus()){
+                            appointmentList.add(appointment);
+                        }
+                    } ;
                     initializeRecyclerView();
                 }
             }

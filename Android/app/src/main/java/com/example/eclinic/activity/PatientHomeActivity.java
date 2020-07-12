@@ -25,6 +25,7 @@ import com.example.eclinic.adapters.DoctorRecyclerAdapter;
 import com.example.eclinic.apiControllers.DoctorProfileController;
 import com.example.eclinic.apiModel.Doctor;
 import com.example.eclinic.apiModel.DoctorAllGetResponseModel;
+import com.example.eclinic.apiModel.Patient;
 import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.ActivityPatientHomeBinding;
 import com.example.eclinic.databinding.RecyclerDoctorsBinding;
@@ -119,6 +120,9 @@ public class PatientHomeActivity extends AppCompatActivity {
                     startActivity(i);
                 }else if(item.getItemId() == R.id.pending){
                     Intent i = new Intent(PatientHomeActivity.this,PendingAppointments.class);
+                    startActivity(i);
+                }else if(item.getItemId() == R.id.confirmed){
+                    Intent i = new Intent(PatientHomeActivity.this,ConfirmedAppointmentActivity.class);
                     startActivity(i);
                 }
                 return false;

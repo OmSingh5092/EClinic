@@ -16,8 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.ConfirmedAppointmentActivity"></activity>
-        <activity android:name=".activity.ConfirmedAppointments" />
+        <activity android:name=".activity.PatientAppointmentActivity"></activity>
+        <activity android:name=".activity.DoctorAppointmentActivity" />
+        <activity android:name=".activity.ConfirmedAppointmentActivity" />
         <activity android:name=".activity.PendingAppointments" />
         <activity android:name=".activity.BookAppointmentActivity" />
         <activity android:name=".activity.AboutDoctorActivity" />

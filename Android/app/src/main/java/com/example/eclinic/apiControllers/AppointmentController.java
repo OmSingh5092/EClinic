@@ -29,4 +29,9 @@ public class AppointmentController {
         Call<AppointmentGetResponseModel> call= RetrofitClient.getClient().getAppointment(token);
         call.enqueue(callback);
     }
+
+    public static void getAppointmentDoctor(String token, Callback<AppointmentGetResponseModel>callback){
+        Call<AppointmentGetResponseModel> call= RetrofitClient.getClient().getAppointmentDoctor(token);
+        call.enqueue(callback);
+    }
 }

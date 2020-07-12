@@ -6,8 +6,8 @@
         android:title="Profile"/>
 
     <item
-        android:id="@+id/appointments"
-        android:title="Appointments"/>
+        android:id="@+id/request"
+        android:title="Appointment Request"/>
 
     <item
         android:id="@+id/logout"

@@ -22,6 +22,29 @@ module.exports.getAppointment = (req,res)=>{
     })
 }
 
+module.exports.getAppointmentDoctor = (req,res)=>{
+    const id = req.user.id;
+    //Here is will be of the patient
+    return table.findAll({
+        where:{
+            doctor_id:id,
+        }
+    }).then((appointmentData)=>{
+        return res.status(200).json({
+            success:true,
+            appointment:appointmentData,
+        })
+    }).catch((err)=>{
+        console.log(err);
+        return res.status(500).json({
+            success:true,
+            msg:"Internal Server Error",
+        })
+    })
+
+}
+
+
 module.exports.addAppointment = (req,res)=>{
     const id = req.user.id;
     //Here id is the patient's id

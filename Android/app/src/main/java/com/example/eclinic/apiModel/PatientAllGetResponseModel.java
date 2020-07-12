@@ -5,15 +5,14 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class AppointmentGetResponseModel {
+public class PatientAllGetResponseModel {
 
     @SerializedName("success")
     @Expose
     boolean success;
-    @SerializedName("appointment")
+    @SerializedName("data")
     @Expose
-    List<Appointment> appointments;
-
+    List<Patient> patients;
 
     public boolean isSuccess() {
         return success;
@@ -23,11 +22,11 @@ public class AppointmentGetResponseModel {
         this.success = success;
     }
 
-    public List<Appointment> getAppointments() {
-        return appointments;
+    public List<Patient> getPatients() {
+        return patients;
     }
 
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments = appointments;
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
     }
 }

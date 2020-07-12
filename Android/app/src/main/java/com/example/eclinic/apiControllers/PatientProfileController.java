@@ -1,6 +1,7 @@
 package com.example.eclinic.apiControllers;
 
 import com.example.eclinic.apiModel.Patient;
+import com.example.eclinic.apiModel.PatientAllGetResponseModel;
 import com.example.eclinic.apiModel.PatientGetResponseModel;
 import com.example.eclinic.apiModel.PatientUpdateResponseModel;
 import com.example.eclinic.apiModel.TokenResponseModel;
@@ -31,6 +32,11 @@ public class PatientProfileController {
 
     public static void getProfile(String token, Callback<PatientGetResponseModel> callback){
         Call<PatientGetResponseModel>call = RetrofitClient.getClient().getPatient(token);
+        call.enqueue(callback);
+    }
+
+    public static void getAllProfile(String token, Callback<PatientAllGetResponseModel> callback){
+        Call<PatientAllGetResponseModel> call = RetrofitClient.getClient().getAllPatient(token);
         call.enqueue(callback);
     }
 }

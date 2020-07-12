@@ -5,6 +5,7 @@ import com.example.eclinic.apiModel.AppointmentGetResponseModel;
 import com.example.eclinic.apiModel.DoctorAllGetResponseModel;
 import com.example.eclinic.apiModel.DoctorGetResponseModel;
 import com.example.eclinic.apiModel.DoctorUpdateResponseModel;
+import com.example.eclinic.apiModel.PatientAllGetResponseModel;
 import com.example.eclinic.apiModel.PatientGetResponseModel;
 import com.example.eclinic.apiModel.PatientUpdateResponseModel;
 import com.example.eclinic.apiModel.TokenResponseModel;
@@ -35,6 +36,8 @@ public interface APIInterface {
     Call<PatientUpdateResponseModel> updatePatient(@Header("token") String token, @Body Map<String,String> body);
     @GET("patient/get")
     Call<PatientGetResponseModel> getPatient(@Header("token") String token);
+    @GET("patient/getall")
+    Call<PatientAllGetResponseModel> getAllPatient(@Header("token") String token);
 
     @POST("doctor/update")
     Call<DoctorUpdateResponseModel> updateDoctor(@Header("token") String token, @Body Map<String,String> body);
@@ -42,11 +45,11 @@ public interface APIInterface {
     Call<DoctorGetResponseModel> getDoctor(@Header("token") String token);
     @GET("doctor/getall")
     Call<DoctorAllGetResponseModel> getAllDoctor(@Header("token") String token);
-    @HTTP(method = "GET", path = "doctor/get", hasBody = true)
-    Call<DoctorGetResponseModel> getDoctorFromId(@Header("token")String token, @Body Map<String,String> body);
 
     @POST("appointment/add")
     Call<AppointmentAddResponseModel> addAppointment(@Header("token") String token, @Body Map<String,String> body);
     @GET("appointment/get")
     Call<AppointmentGetResponseModel> getAppointment(@Header("token") String token);
+    @GET("appointment/get/doctor")
+    Call<AppointmentGetResponseModel> getAppointmentDoctor(@Header("token") String token);
 }

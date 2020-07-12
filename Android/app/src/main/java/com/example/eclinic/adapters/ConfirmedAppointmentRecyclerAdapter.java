@@ -1,61 +1,60 @@
 package com.example.eclinic.adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.eclinic.apiControllers.DoctorProfileController;
 import com.example.eclinic.apiModel.Appointment;
 import com.example.eclinic.apiModel.Doctor;
-import com.example.eclinic.apiModel.DoctorGetResponseModel;
 import com.example.eclinic.data.GeneralData;
-import com.example.eclinic.databinding.RecyclerPendingAppointmentBinding;
-import com.example.eclinic.utils.SharedPrefs;
+import com.example.eclinic.databinding.RecyclerConfirmedAppointmentBinding;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class PendingAppointmentRecyclerAdapter extends RecyclerView.Adapter<PendingAppointmentRecyclerAdapter.ViewHolder> {
+public class ConfirmedAppointmentRecyclerAdapter extends RecyclerView.Adapter<ConfirmedAppointmentRecyclerAdapter.ViewHolder> {
 
-    RecyclerPendingAppointmentBinding binding;
     List<Appointment> data;
     Context context;
 
-    SharedPrefs prefs;
+    RecyclerConfirmedAppointmentBinding binding;
 
-    public PendingAppointmentRecyclerAdapter(List<Appointment> data, Context context) {
+    public ConfirmedAppointmentRecyclerAdapter(List<Appointment> data, Context context) {
         this.data = data;
         this.context = context;
-        prefs = new SharedPrefs(context);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = RecyclerPendingAppointmentBinding.inflate(LayoutInflater.from(context),parent,false);
+        binding = RecyclerConfirmedAppointmentBinding.inflate(LayoutInflater.from(context),parent,false);
         return new ViewHolder(binding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.name.setText(findDoctor(data.get(position).getDoctorId()).getDoctorName());
+        Doctor doctor = findDoctor(data.get(position).getDoctorId());
 
-        holder.cancel.setOnClickListener(new View.OnClickListener() {
+        holder.name.setText(doctor.getDoctorName());
+        holder.time.setText(data.get(position).getDate());
+
+        if(data.get(position).isPaymentStatus()){
+            holder.pay.setVisibility(View.GONE);
+        }
+
+        holder.pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                
             }
         });
+
     }
 
     @Override
@@ -64,19 +63,21 @@ public class PendingAppointmentRecyclerAdapter extends RecyclerView.Adapter<Pend
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView name;
-        MaterialButton cancel;
+
+        TextView name,time;
+        MaterialButton pay;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name= binding.name;
-            cancel = binding.cancle;
-
+            name = binding.name;
+            time = binding.time;
+            pay = binding.pay;
         }
     }
 
     Doctor findDoctor(int id){
         for(Doctor doctor:GeneralData.getDoctors()){
-            if(doctor.getDoctorId() == id ){
+            if(doctor.getDoctorId() == id){
                 return doctor;
             }
         }
