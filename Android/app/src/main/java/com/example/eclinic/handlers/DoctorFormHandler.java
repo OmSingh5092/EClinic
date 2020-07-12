@@ -139,8 +139,6 @@ public class DoctorFormHandler {
         return file;
     }
 
-
-
     public void initialize(){
         binding.category.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +155,6 @@ public class DoctorFormHandler {
                 activity.startActivityForResult(Intent.createChooser(pictureIntent,"Select Picture"), 100);  // 4
             }
         });
-
         binding.submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,7 +169,6 @@ public class DoctorFormHandler {
         if(!isFilled()){
             return;
         }
-
         doctor.setDoctorName(name);
         doctor.setRegistrationNumber(registration);
         doctor.setStateMedicalCouncil(council);
@@ -195,11 +191,7 @@ public class DoctorFormHandler {
 
             }
         });
-
-
     }
-
-
 
     private void initText(){
         name = binding.name.getText().toString();
@@ -230,10 +222,8 @@ public class DoctorFormHandler {
             Toast.makeText(context, "Please type something about you", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
     }
-
 
     private void initCategoryPopOver(){
         PopupMenu menu = new PopupMenu(context, binding.category);

@@ -120,8 +120,6 @@ const doctorSignIn = async (req,res)=>{
         attributes: ['doctor_id', 'doctor_name', 'email']
     })
 
-    
-
     if(!user){
         var create_object = {
             email: userEmail,

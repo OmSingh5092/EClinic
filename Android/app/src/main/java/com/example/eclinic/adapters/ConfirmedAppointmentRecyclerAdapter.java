@@ -55,14 +55,6 @@ public class ConfirmedAppointmentRecyclerAdapter extends RecyclerView.Adapter<Co
         if(data.get(position).isPaymentStatus()){
             holder.pay.setVisibility(View.GONE);
         }
-
-        holder.pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                
-            }
-        });
-
     }
 
     @Override
@@ -71,7 +63,6 @@ public class ConfirmedAppointmentRecyclerAdapter extends RecyclerView.Adapter<Co
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
         TextView name,time;
         MaterialButton pay;
 

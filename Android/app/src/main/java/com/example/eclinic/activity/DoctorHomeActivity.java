@@ -68,8 +68,6 @@ public class DoctorHomeActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     void loadData(){

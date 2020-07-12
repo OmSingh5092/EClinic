@@ -24,11 +24,9 @@ const config = {
     app:{
         local:{
             port:4000,
-            
         },
 
     },
-
     jwt:{
         jwtKey:process.env.JWT_KEY|| "ECLINIC"
     }

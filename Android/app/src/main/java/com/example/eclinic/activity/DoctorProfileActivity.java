@@ -72,9 +72,7 @@ public class DoctorProfileActivity extends AppCompatActivity implements FormHand
     }
 
     void setUpData(){
-
         new ImageDownloader(binding.doctorForm.image,doctor.getPhotoPath(),this);
-
         binding.doctorForm.name.setText(doctor.getDoctorName());
         binding.doctorForm.registrationNumber.setText(doctor.getRegistrationNumber());
         binding.doctorForm.yearOfRegistration.setText(doctor.getYearOfRegistration());
@@ -84,8 +82,6 @@ public class DoctorProfileActivity extends AppCompatActivity implements FormHand
         binding.doctorForm.about.setText(doctor.getAbout());
 
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -42,12 +42,8 @@ public class PatientHomeActivity extends AppCompatActivity {
     ActivityPatientHomeBinding binding;
     CategoryRecyclerAdapter categoryRecyclerAdapter;
     DoctorRecyclerAdapter doctorRecyclerAdapter;
-
     List<Doctor> filteredList = new ArrayList<>();
-
     SharedPrefs prefs;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +58,9 @@ public class PatientHomeActivity extends AppCompatActivity {
         handleDrawerMenu();
 
         setUpSearch();
-
-
     }
 
     void loadData(){
-
         DoctorProfileController.getAllDoctors(prefs.getToken(), new Callback<DoctorAllGetResponseModel>() {
             @Override
             public void onResponse(Call<DoctorAllGetResponseModel> call, Response<DoctorAllGetResponseModel> response) {
@@ -80,14 +73,11 @@ public class PatientHomeActivity extends AppCompatActivity {
                     Log.i("Data loaded",response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<DoctorAllGetResponseModel> call, Throwable t) {
                 Log.e("Error",t.getMessage());
             }
         });
-
-
     }
     void setUpCategoryRecyclerView(){
         List<String> categoryList = new ArrayList<>();
@@ -131,12 +121,10 @@ public class PatientHomeActivity extends AppCompatActivity {
         binding.search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -155,12 +143,9 @@ public class PatientHomeActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     public boolean onSupportNavigateUp() {
         binding.getRoot().openDrawer(Gravity.LEFT);
         return super.onSupportNavigateUp();
     }
-
-
 }

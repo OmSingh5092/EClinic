@@ -31,11 +31,7 @@ import java.util.List;
 public class PendingAppointments extends AppCompatActivity  {
     ActivityPendingAppointmentsBinding binding;
     List<Appointment> appointmentList = new ArrayList<>();
-
     PendingAppointmentRecyclerAdapter adapter ;
-
-
-
 
     SharedPrefs prefs;
 
@@ -49,13 +45,7 @@ public class PendingAppointments extends AppCompatActivity  {
         prefs = new SharedPrefs(this);
 
         loadData();
-
-
-
     }
-
-
-
 
     void loadData(){
         AppointmentController.getAppointment(prefs.getToken(), new Callback<AppointmentGetResponseModel>() {
@@ -72,7 +62,6 @@ public class PendingAppointments extends AppCompatActivity  {
                     initializeRecyclerView();
                 }
             }
-
             @Override
             public void onFailure(Call<AppointmentGetResponseModel> call, Throwable t) {
 

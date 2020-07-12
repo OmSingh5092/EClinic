@@ -93,9 +93,7 @@ public class PatientAppointmentActivity extends AppCompatActivity implements Pay
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         checkout.open(this,data);
-
     }
 
     void setFields(){
@@ -119,17 +117,12 @@ public class PatientAppointmentActivity extends AppCompatActivity implements Pay
 
     }
 
-    void seePdf(){
-
-    }
-
     Doctor findDoctor(int id){
         for(Doctor doctor:GeneralData.getDoctors()){
             if(doctor.getDoctorId() == id){
                 return doctor;
             }
         }
-
         return null;
     }
 
@@ -164,8 +157,6 @@ public class PatientAppointmentActivity extends AppCompatActivity implements Pay
 
             }
         });
-
-
     }
 
     @Override

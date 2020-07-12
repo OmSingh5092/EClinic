@@ -52,8 +52,6 @@ public class GetStartedActivity extends AppCompatActivity implements  GoogleApiC
         binding = ActivityGetStartedBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
         prefs = new SharedPrefs(this);

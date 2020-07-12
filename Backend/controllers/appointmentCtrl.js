@@ -87,7 +87,6 @@ module.exports.addAppointment = (req,res)=>{
     })
 }
 
-
 module.exports.deleteAppointment = (req,res)=>{
     const id = req.user.id;
     //Here the id is the patient's id

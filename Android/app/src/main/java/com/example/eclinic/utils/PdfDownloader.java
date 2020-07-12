@@ -15,14 +15,12 @@ import java.io.File;
 import androidx.core.content.FileProvider;
 
 public class PdfDownloader {
-
     Context context;
     String path;
 
     public PdfDownloader(Context context, String path) {
         this.context = context;
         this.path = path;
-
         initialize();
     }
     private void initialize() {
@@ -31,7 +29,6 @@ public class PdfDownloader {
         if(!root.exists()){
             root.mkdir();
         }
-
 
         File pdfFile = new File(root,"prescription.pdf");
 
@@ -49,7 +46,6 @@ public class PdfDownloader {
                         openPdf(pdfFile);
                     }
                 });
-
     }
 
     private void openPdf(File pdfFile){
@@ -60,5 +56,4 @@ public class PdfDownloader {
         i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         context.startActivity(i);
     }
-
 }

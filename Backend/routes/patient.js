@@ -8,5 +8,4 @@ router.get("/get",userVerification,controller.getPatientProfile);
 router.post('/update',userVerification,controller.updatePatientProfile);
 router.get("/getall",userVerification,controller.getAllProfile);
 
-
 module.exports = router;

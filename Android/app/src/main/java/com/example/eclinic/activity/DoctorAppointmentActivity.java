@@ -170,14 +170,10 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-
-
-
     }
 
 
     void onAccept(){
-
         appointment.setStatus(true);
         appointment.setDate(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'").format(new Date(calendar.getTimeInMillis())));
         appointment.setNewPrescriptionPath(pdfPath);

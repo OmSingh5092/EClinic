@@ -49,13 +49,6 @@ public class PendingAppointmentRecyclerAdapter extends RecyclerView.Adapter<Pend
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(findDoctor(data.get(position).getDoctorId()).getDoctorName());
-
-        holder.cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     @Override
@@ -70,7 +63,6 @@ public class PendingAppointmentRecyclerAdapter extends RecyclerView.Adapter<Pend
             super(itemView);
             name= binding.name;
             cancel = binding.cancle;
-
         }
     }
 

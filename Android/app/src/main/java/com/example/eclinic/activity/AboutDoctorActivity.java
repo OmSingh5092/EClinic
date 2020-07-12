@@ -33,7 +33,6 @@ public class AboutDoctorActivity extends AppCompatActivity {
         initializeText();
         new ImageDownloader(binding.image,doctor.getPhotoPath(),this);
 
-
         prefs = new SharedPrefs(this);
 
         binding.book.setOnClickListener(new View.OnClickListener() {

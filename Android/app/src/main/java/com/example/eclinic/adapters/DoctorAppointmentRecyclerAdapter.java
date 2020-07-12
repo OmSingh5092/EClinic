@@ -52,9 +52,7 @@ public class DoctorAppointmentRecyclerAdapter extends RecyclerView.Adapter<Docto
         }catch (NullPointerException e){
             e.printStackTrace();
         }
-
         new ImageDownloader(holder.image,patient.getPhotoPath(),context);
-
     }
 
     @Override
@@ -63,7 +61,6 @@ public class DoctorAppointmentRecyclerAdapter extends RecyclerView.Adapter<Docto
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
         TextView name,time;
         ImageView image;
 
@@ -90,7 +87,6 @@ public class DoctorAppointmentRecyclerAdapter extends RecyclerView.Adapter<Docto
                 return patient;
             }
         }
-
         return null;
     }
 }

@@ -19,12 +19,8 @@ import com.example.eclinic.utils.SharedPrefs;
 
 public class DoctorPaymentActivity extends AppCompatActivity {
     ActivityDoctorPaymentBinding binding;
-
     SharedPrefs prefs;
-
     Doctor doctor;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,16 +44,13 @@ public class DoctorPaymentActivity extends AppCompatActivity {
                     }catch (NullPointerException e){
                         e.printStackTrace();
                     }
-
                 }
             }
-
             @Override
             public void onFailure(Call<DoctorGetResponseModel> call, Throwable t) {
 
             }
         });
-
     }
 
     void initialize() throws NullPointerException{
@@ -76,10 +69,8 @@ public class DoctorPaymentActivity extends AppCompatActivity {
         if(!isFilled()){
             return;
         }
-
         doctor.setUpiId(binding.upi.getText().toString());
         doctor.setFeesGeneral(binding.fees.getText().toString());
-
         DoctorProfileController.updateDoctor(doctor, prefs.getToken(), new Callback<DoctorUpdateResponseModel>() {
             @Override
             public void onResponse(Call<DoctorUpdateResponseModel> call, Response<DoctorUpdateResponseModel> response) {
@@ -94,9 +85,6 @@ public class DoctorPaymentActivity extends AppCompatActivity {
 
             }
         });
-
-
-
     }
 
     boolean isFilled(){
@@ -108,7 +96,6 @@ public class DoctorPaymentActivity extends AppCompatActivity {
             Toast.makeText(this, "Enter Upi Id", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
     }
 

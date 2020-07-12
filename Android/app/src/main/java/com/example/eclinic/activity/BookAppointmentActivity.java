@@ -35,7 +35,6 @@ public class BookAppointmentActivity extends AppCompatActivity {
     int doctorIndex;
     Appointment appointment;
 
-
     String text,pdfPath,interaction;
 
     SharedPrefs prefs;
@@ -49,13 +48,9 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
         doctorIndex = getIntent().getIntExtra("doctorIndex",0);
         doctor = GeneralData.getDoctors().get(doctorIndex);
-
         initializeText();
         new ImageDownloader(binding.image,doctor.getPhotoPath(),this);
-
         appointment = new Appointment();
-
-
         prefs = new SharedPrefs(this);
 
         binding.upload.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +90,6 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
     void onSubmit(){
         setText();
-
         appointment.setDoctorId(doctor.getDoctorId());
         appointment.setText(text);
         appointment.setInteractionMethod(interaction);
@@ -115,8 +109,6 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     void setText(){

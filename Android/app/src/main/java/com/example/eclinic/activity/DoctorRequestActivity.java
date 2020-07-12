@@ -49,8 +49,6 @@ public class DoctorRequestActivity extends AppCompatActivity {
         loadData();
     }
 
-
-
     void loadData(){
         AppointmentController.getAppointmentDoctor(prefs.getToken(), new Callback<AppointmentGetResponseModel>() {
             @Override
@@ -78,8 +76,6 @@ public class DoctorRequestActivity extends AppCompatActivity {
         adapter = new DoctorAppointmentRecyclerAdapter(list,this);
         binding.recyclerView.setAdapter(adapter);
     }
-
-
 
     @Override
     public boolean onSupportNavigateUp() {

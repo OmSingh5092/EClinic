@@ -13,7 +13,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SignOutHandler {
-
     Context context;
     SharedPrefs prefs;
 
@@ -29,9 +28,7 @@ public class SignOutHandler {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-
         GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
-
         mGoogleSignInClient.revokeAccess().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -41,10 +38,7 @@ public class SignOutHandler {
                 Intent i = new Intent(context, GetStartedActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(i);
-
             }
         });
-
-
     }
 }

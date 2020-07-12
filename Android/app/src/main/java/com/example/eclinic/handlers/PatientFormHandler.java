@@ -62,7 +62,6 @@ public class PatientFormHandler {
         patient = new Patient();
 
         storage = FirebaseStorage.getInstance();
-
     }
 
     public void handleOpenImage(Uri uri){
@@ -110,7 +109,6 @@ public class PatientFormHandler {
                 snackbar.dismiss();
             }
         });
-
     }
 
     private void initGenderPopOver(){
@@ -156,10 +154,7 @@ public class PatientFormHandler {
         return file;
     }
 
-
-
     public void initialize(){
-
         binding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,7 +178,6 @@ public class PatientFormHandler {
                 initGenderPopOver();
             }
         });
-
     }
 
     private  void onSubmit(){
@@ -191,14 +185,12 @@ public class PatientFormHandler {
         if(!isFilled()){
             return;
         }
-
         patient.setPatientName(name);
         patient.setBlood(blood);
         patient.setPhoneNumber(phone);
         patient.setWeight(Integer.valueOf(weight));
         patient.setGender(gender);
         patient.setPhotoPath(profilePath);
-
         PatientProfileController.updateProfile(patient, prefs.getToken(), new Callback<PatientUpdateResponseModel>() {
             @Override
             public void onResponse(Call<PatientUpdateResponseModel> call, Response<PatientUpdateResponseModel> response) {
@@ -206,14 +198,11 @@ public class PatientFormHandler {
                     handler.onFormSubmitted();
                 }
             }
-
             @Override
             public void onFailure(Call<PatientUpdateResponseModel> call, Throwable t) {
 
             }
         });
-
-
     }
 
     private void initText(){
@@ -238,7 +227,6 @@ public class PatientFormHandler {
             Toast.makeText(context, "Please enter a weight", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
     }
 }

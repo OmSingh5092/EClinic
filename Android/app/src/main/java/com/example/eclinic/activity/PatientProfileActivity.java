@@ -66,9 +66,7 @@ public class PatientProfileActivity extends AppCompatActivity implements FormHan
     }
 
     void setUpData(){
-
         new ImageDownloader(binding.patientForm.image,patient.getPhotoPath(),this);
-
         binding.patientForm.name.setText(patient.getPatientName());
         binding.patientForm.blood.setText(patient.getBlood());
         binding.patientForm.gender.setText(patient.getGender());
@@ -76,8 +74,6 @@ public class PatientProfileActivity extends AppCompatActivity implements FormHan
         binding.patientForm.weight.setText(String.valueOf(patient.getWeight()));
 
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

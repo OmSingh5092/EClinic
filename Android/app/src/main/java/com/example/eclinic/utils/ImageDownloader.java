@@ -15,11 +15,9 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 public class ImageDownloader {
-
     ImageView imageView;
     String path;
     Context context;
-
     FirebaseStorage storage;
 
     public ImageDownloader(ImageView imageView, String path, Context context) {
@@ -28,15 +26,12 @@ public class ImageDownloader {
         this.context = context;
 
         storage = FirebaseStorage.getInstance();
-
         try {
             start();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 
     private void start() throws IOException {
         if(path == null){

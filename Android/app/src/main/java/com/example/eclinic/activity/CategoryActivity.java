@@ -41,7 +41,6 @@ public class CategoryActivity extends AppCompatActivity {
         setUpRecyclerView();
 
         setUpSearch();
-
     }
 
     void generateList(){
@@ -63,12 +62,10 @@ public class CategoryActivity extends AppCompatActivity {
         binding.search.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -80,7 +77,6 @@ public class CategoryActivity extends AppCompatActivity {
                         filteredList.add(doctor);
                     }
                 }
-
                 adapter = new DoctorRecyclerAdapter(filteredList,CategoryActivity.this);
                 binding.recyclerView.setAdapter(adapter);
             }
