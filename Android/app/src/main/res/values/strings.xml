@@ -2,6 +2,9 @@
     <string name="app_name">EClinic</string>
     <string name="web_client_id">541374752269-86ein6vehn2elteuea39arj5nnaok92o.apps.googleusercontent.com</string>
 
+    <string name="razorpay_key_id">rzp_test_VeplyinjRhEMw9</string>
+    <string name="key_secret">E61g1RM4WK7RWm9yI5CxtazF</string>
+
     <string-array name="doctor_category">
         <item>Dental</item>
         <item>Heart</item>

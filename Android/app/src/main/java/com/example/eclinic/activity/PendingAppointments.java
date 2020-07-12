@@ -1,12 +1,15 @@
 package com.example.eclinic.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.eclinic.R;
 import com.example.eclinic.adapters.PendingAppointmentRecyclerAdapter;
@@ -16,15 +19,23 @@ import com.example.eclinic.apiModel.AppointmentGetResponseModel;
 import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.ActivityPendingAppointmentsBinding;
 import com.example.eclinic.utils.SharedPrefs;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PendingAppointments extends AppCompatActivity {
+public class PendingAppointments extends AppCompatActivity  {
     ActivityPendingAppointmentsBinding binding;
     List<Appointment> appointmentList = new ArrayList<>();
 
     PendingAppointmentRecyclerAdapter adapter ;
+
+
+
 
     SharedPrefs prefs;
 
@@ -40,7 +51,10 @@ public class PendingAppointments extends AppCompatActivity {
         loadData();
 
 
+
     }
+
+
 
 
     void loadData(){
@@ -76,5 +90,11 @@ public class PendingAppointments extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

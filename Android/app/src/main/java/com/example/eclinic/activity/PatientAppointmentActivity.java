@@ -1,7 +1,9 @@
 package com.example.eclinic.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,15 +16,22 @@ import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.ActivityPatientAppointmentBinding;
 import com.example.eclinic.utils.DateFormatter;
 import com.example.eclinic.utils.ImageDownloader;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 
-public class PatientAppointmentActivity extends AppCompatActivity {
+public class PatientAppointmentActivity extends AppCompatActivity implements PaymentResultListener {
     ActivityPatientAppointmentBinding binding;
 
     int appointmentIndex;
     Appointment appointment;
     Doctor doctor;
+
+    Checkout checkout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,31 @@ public class PatientAppointmentActivity extends AppCompatActivity {
         doctor = findDoctor(appointment.getDoctorId());
 
         setFields();
+
+        binding.pay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handlePayment();
+            }
+        });
+    }
+
+    void handlePayment(){
+        checkout = new Checkout();
+        checkout.setKeyID(getResources().getString(R.string.razorpay_key_id));
+        JSONObject data = new JSONObject();
+        try{
+            data.put("amount", 200);
+            data.put("email", doctor.getEmail());
+            data.put("contact", doctor.getPhoneNumber());
+            data.put("method", "upi");
+            data.put("_[flow]", "intent");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        checkout.open(this,data);
+
     }
 
     void setFields(){
@@ -78,5 +112,25 @@ public class PatientAppointmentActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    /*@Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(checkout!=null){
+            checkout.onActivityResult(requestCode,resultCode,data);
+        }
+    }  */
+
+    @Override
+    public void onPaymentSuccess(String s) {
+
+        Toast.makeText(this, "Payment Successfull", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        Log.e("Payment Error",s);
     }
 }
