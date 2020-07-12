@@ -114,6 +114,9 @@ public class DoctorHomeActivity extends AppCompatActivity {
                 }else if(item.getItemId() == R.id.request){
                     Intent i = new Intent(DoctorHomeActivity.this,DoctorRequestActivity.class);
                     startActivity(i);
+                }else if(item.getItemId() == R.id.profile){
+                    Intent i = new Intent(DoctorHomeActivity.this,DoctorProfileActivity.class);
+                    startActivity(i);
                 }
                 return false;
             }

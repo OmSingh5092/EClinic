@@ -46,7 +46,7 @@ public class DoctorAppointmentRecyclerAdapter extends RecyclerView.Adapter<Docto
         Patient patient = findPatient(data.get(position).getPatientId());
         holder.name.setText(patient.getPatientName());
         try {
-            holder.time.setText(new DateFormatter(data.get(position).getDate()).getDateFormat1());
+            holder.time.setText(new DateFormatter(data.get(position).getDate()).getFullDate());
         } catch (ParseException e) {
             e.printStackTrace();
         }catch (NullPointerException e){

@@ -3,11 +3,8 @@ const fetch = require('../functions/fetchFunction');
 
 module.exports.getDoctorProfile = (req,res)=>{
     var id = req.user.id;
-    console.log("Body",req.body);
+    console.log("User Id",id);
 
-    if(req.body != null){
-        id = req.body.doctor_id;
-    }
     return table.findAll({
         where:{
             doctor_id:id,

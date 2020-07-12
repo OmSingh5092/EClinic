@@ -147,7 +147,7 @@ public class PatientHomeActivity extends AppCompatActivity {
                 String text = editable.toString().toLowerCase();
                 filteredList = new ArrayList<>();
                 for(Doctor doctor: GeneralData.getDoctors()){
-                    if(doctor.getDoctorName().contains(text)){
+                    if(doctor.getDoctorName().toLowerCase().contains(text)){
                         filteredList.add(doctor);
                     }
                 }

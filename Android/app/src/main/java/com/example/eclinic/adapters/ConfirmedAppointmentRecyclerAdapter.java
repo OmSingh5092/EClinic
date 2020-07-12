@@ -11,8 +11,10 @@ import com.example.eclinic.apiModel.Appointment;
 import com.example.eclinic.apiModel.Doctor;
 import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.RecyclerConfirmedAppointmentBinding;
+import com.example.eclinic.utils.DateFormatter;
 import com.google.android.material.button.MaterialButton;
 
+import java.text.ParseException;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -42,7 +44,11 @@ public class ConfirmedAppointmentRecyclerAdapter extends RecyclerView.Adapter<Co
         Doctor doctor = findDoctor(data.get(position).getDoctorId());
 
         holder.name.setText(doctor.getDoctorName());
-        holder.time.setText(data.get(position).getDate());
+        try {
+            holder.time.setText(new DateFormatter(data.get(position).getDate()).getFullDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         if(data.get(position).isPaymentStatus()){
             holder.pay.setVisibility(View.GONE);

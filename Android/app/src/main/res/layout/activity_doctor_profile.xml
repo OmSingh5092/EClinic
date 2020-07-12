@@ -22,7 +22,7 @@
 
         <include
             layout="@layout/layout_doctor_form"
-            android:id="@+id/patient_form"/>
+            android:id="@+id/doctor_form"/>
 
     </LinearLayout>
 </LinearLayout>

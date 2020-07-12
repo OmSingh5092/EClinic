@@ -33,7 +33,6 @@ public class ConfirmedAppointmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityConfirmedAppointmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         setSupportActionBar(binding.toolbar);
         prefs = new SharedPrefs(this);
 
@@ -67,5 +66,11 @@ public class ConfirmedAppointmentActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return super.onSupportNavigateUp();
     }
 }
