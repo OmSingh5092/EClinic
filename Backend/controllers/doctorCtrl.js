@@ -22,6 +22,22 @@ module.exports.getDoctorProfile = (req,res)=>{
     })
 }
 
+module.exports.getAllDoctorProfile=(req,res)=>{
+    return table.findAll()
+    .then((data)=>{
+        return res.status(500).json({
+            success:true,
+            data:data,
+        })
+    }).catch((err)=>{
+        console.log(err);
+        res.status(200).json({
+            success:false,
+            msg:"Internal Server Error",
+        })
+    })
+}
+
 module.exports.updateDoctorProfile = (req,res)=>{
     const id = req.user.id;
     const update = req.body;

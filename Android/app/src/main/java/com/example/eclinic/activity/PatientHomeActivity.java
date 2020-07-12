@@ -34,10 +34,11 @@ public class PatientHomeActivity extends AppCompatActivity {
 
     void loadData(){
 
+        
+
     }
     void setUpCategoryRecyclerView(){
         List<String> categoryList = new ArrayList<>();
-
         binding.recyclerCategories.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
     }
 
