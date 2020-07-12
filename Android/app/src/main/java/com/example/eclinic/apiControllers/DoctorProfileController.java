@@ -25,6 +25,7 @@ public class DoctorProfileController {
         body.put("state_medical_council",doctor.getStateMedicalCouncil());
         body.put("photo_path",doctor.getPhotoPath());
         body.put("category",doctor.getCategory());
+        body.put("about",doctor.getAbout());
 
         Call<DoctorUpdateResponseModel> call = RetrofitClient.getClient().updateDoctor(token,body);
         call.enqueue(callback);

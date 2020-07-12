@@ -1,17 +1,17 @@
 package com.example.eclinic.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.eclinic.activity.AboutDoctorActivity;
 import com.example.eclinic.apiModel.Doctor;
 import com.example.eclinic.databinding.RecyclerDoctorsBinding;
 import com.example.eclinic.utils.ImageDownloader;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -56,6 +56,15 @@ public class DoctorRecyclerAdapter extends RecyclerView.Adapter<DoctorRecyclerAd
             imageView = binding.image;
             name = binding.doctorName;
             category = binding.doctorCategory;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, AboutDoctorActivity.class);
+                    i.putExtra("doctorIndex",getAdapterPosition());
+                    context.startActivity(i);
+                }
+            });
 
         }
     }

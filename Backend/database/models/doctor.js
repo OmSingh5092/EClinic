@@ -52,6 +52,11 @@ const doctor = sequelize.define('doctor',{
         type:Sequelize.INTEGER,
     },
 
+    //About
+    about:{
+        type:Sequelize.TEXT
+    },
+
     created_at: {
         type: Sequelize.DATE,
         allowNull: false,

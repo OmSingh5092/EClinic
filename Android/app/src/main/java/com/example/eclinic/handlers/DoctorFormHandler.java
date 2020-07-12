@@ -54,7 +54,7 @@ public class DoctorFormHandler {
     FirebaseStorage storage;
     FirebaseAuth auth;
 
-    String name,phone,registration,year,council,profilePath,category;
+    String name,phone,registration,year,council,profilePath,category,about;
 
     public DoctorFormHandler(FormHandler handler, LayoutDoctorFormBinding binding) {
         this.handler = handler;
@@ -180,6 +180,7 @@ public class DoctorFormHandler {
         doctor.setPhotoPath(profilePath);
         doctor.setPhoneNumber(phone);
         doctor.setCategory(category);
+        doctor.setAbout(about);
 
         DoctorProfileController.updateDoctor(doctor, prefs.getToken(), new Callback<DoctorUpdateResponseModel>() {
             @Override
@@ -206,6 +207,7 @@ public class DoctorFormHandler {
         registration = binding.registrationNumber.getText().toString();
         council = binding.stateMedicalCouncil.getText().toString();
         year = binding.yearOfRegistration.getText().toString();
+        about = binding.about.getText().toString();
     }
 
     boolean isFilled(){
@@ -223,6 +225,9 @@ public class DoctorFormHandler {
             return false;
         }else if(year == null){
             Toast.makeText(context, "Please enter an year", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(about == null){
+            Toast.makeText(context, "Please type something about you", Toast.LENGTH_SHORT).show();
             return false;
         }
 

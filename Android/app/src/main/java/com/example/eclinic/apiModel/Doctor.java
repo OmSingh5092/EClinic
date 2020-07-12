@@ -37,6 +37,18 @@ public class Doctor {
     @Expose
     String category;
 
+    @SerializedName("about")
+    @Expose
+    String about;
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
     @SerializedName("fees_priority")
     @Expose
     String feesPriority;

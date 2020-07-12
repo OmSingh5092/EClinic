@@ -24,8 +24,9 @@ module.exports.getAppointment = (req,res)=>{
 module.exports.addAppointment = (req,res)=>{
     const id = req.user.id;
     //Here id is the patient's id
-    const appointment = req.body.appointment;
+    const appointment = req.body;
     appointment.patient_id = id;
+    console.log("Body",req.body);
 
     return table.create(appointment,{returning:true})
     .then((appointmentData)=>{
@@ -41,6 +42,7 @@ module.exports.addAppointment = (req,res)=>{
         })
     })
 }
+
 
 module.exports.deleteAppointment = (req,res)=>{
     const id = req.user.id;
