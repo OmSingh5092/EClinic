@@ -53,6 +53,7 @@ public class ConfirmedAppointmentActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     GeneralData.setAppointments(new ArrayList<>());
                     GeneralData.setAppointments(response.body().getAppointments());
+                    appointmentList = new ArrayList<>();
                     for(Appointment appointment:response.body().getAppointments()){
                         if(appointment.isStatus()){
                             appointmentList.add(appointment);

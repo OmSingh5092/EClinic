@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -35,7 +36,13 @@ public class ImageDownloader {
         }
     }
 
+
+
     private void start() throws IOException {
+        if(path == null){
+            Toast.makeText(context, "Image not found", Toast.LENGTH_SHORT).show();
+            return;
+        }
         final File tempFile = File.createTempFile("image","jpg");
         storage.getReference().child(path)
                 .getFile(tempFile)

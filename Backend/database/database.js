@@ -32,9 +32,9 @@ require('./models/appointment');
 require('./models/patient');
 require('./models/models');
 
-/*sequelize.sync({ force: true })
+sequelize.sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
 }).catch((err)=>{
     console.log(err);
-})  */
+}) 

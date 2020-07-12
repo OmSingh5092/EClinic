@@ -7,9 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.eclinic.R;
 import com.example.eclinic.apiControllers.PatientProfileController;
 import com.example.eclinic.apiModel.Patient;
 import com.example.eclinic.apiModel.PatientUpdateResponseModel;
@@ -110,6 +113,27 @@ public class PatientFormHandler {
 
     }
 
+    private void initGenderPopOver(){
+        PopupMenu menu = new PopupMenu(context, binding.gender);
+        int id = 0;
+        String[] genderList = new String[]{"Male","Female","Others"};
+        for(String string: genderList){
+            menu.getMenu().add(100,id,id,string);
+            id++;
+        }
+
+        menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                String[] genderList = new String[]{"Male","Female","Others"};
+                binding.gender.setText(genderList[menuItem.getItemId()]);
+                return false;
+            }
+        });
+
+        menu.show();
+    }
+
     private void openCropActivity(Uri sourceUri, Uri destinationUri) {
         UCrop.of(sourceUri, destinationUri)
                 .withMaxResultSize(300, 300)
@@ -150,6 +174,13 @@ public class PatientFormHandler {
             @Override
             public void onClick(View view) {
                 onSubmit();
+            }
+        });
+
+        binding.gender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initGenderPopOver();
             }
         });
 
