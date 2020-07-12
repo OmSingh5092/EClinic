@@ -9,7 +9,6 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 
 import com.example.eclinic.R;
@@ -18,11 +17,9 @@ import com.example.eclinic.apiControllers.AppointmentController;
 import com.example.eclinic.apiControllers.PatientProfileController;
 import com.example.eclinic.apiModel.Appointment;
 import com.example.eclinic.apiModel.AppointmentGetResponseModel;
-import com.example.eclinic.apiModel.Doctor;
 import com.example.eclinic.apiModel.PatientAllGetResponseModel;
 import com.example.eclinic.data.GeneralData;
-import com.example.eclinic.databinding.ActivityDoctorHomeBinding;
-import com.example.eclinic.databinding.ActivityDoctorRegisterBinding;
+import com.example.eclinic.databinding.ActivityDoctorRequestBinding;
 import com.example.eclinic.utils.SharedPrefs;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,9 +27,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoctorHomeActivity extends AppCompatActivity {
+public class DoctorRequestActivity extends AppCompatActivity {
+    ActivityDoctorRequestBinding binding;
 
-    ActivityDoctorHomeBinding binding;
     SharedPrefs prefs;
 
     DoctorAppointmentRecyclerAdapter adapter;
@@ -42,12 +39,12 @@ public class DoctorHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityDoctorHomeBinding.inflate(getLayoutInflater());
+        binding = ActivityDoctorRequestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         setSupportActionBar(binding.toolbar);
 
         prefs = new SharedPrefs(this);
-        handleDrawerMenu();
 
         loadPatientData();
     }
@@ -77,7 +74,7 @@ public class DoctorHomeActivity extends AppCompatActivity {
             public void onResponse(Call<AppointmentGetResponseModel> call, Response<AppointmentGetResponseModel> response) {
                 if(response.isSuccessful()){
                     for(Appointment appointment:response.body().getAppointments()){
-                        if(appointment.isStatus()){
+                        if(!appointment.isStatus()){
                             list.add(appointment);
                             initializeRecyclerView();
                         }
@@ -98,28 +95,11 @@ public class DoctorHomeActivity extends AppCompatActivity {
         binding.recyclerView.setAdapter(adapter);
     }
 
-    void handleDrawerMenu(){
-        binding.navigation.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId() == R.id.logout){
-                    prefs.clearData();
-                    FirebaseAuth.getInstance().signOut();
-                    Intent i = new Intent(DoctorHomeActivity.this,GetStartedActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
-                }else if(item.getItemId() == R.id.request){
-                    Intent i = new Intent(DoctorHomeActivity.this,DoctorRequestActivity.class);
-                    startActivity(i);
-                }
-                return false;
-            }
-        });
-    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
-        binding.getRoot().openDrawer(Gravity.LEFT);
+        finish();;
         return super.onSupportNavigateUp();
     }
 }

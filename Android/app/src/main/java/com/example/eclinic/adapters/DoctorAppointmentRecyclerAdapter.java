@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.eclinic.apiModel.Appointment;
@@ -11,6 +12,7 @@ import com.example.eclinic.apiModel.Patient;
 import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.RecyclerDoctorAppointmentBinding;
 import com.example.eclinic.utils.DateFormatter;
+import com.example.eclinic.utils.ImageDownloader;
 
 import java.text.ParseException;
 import java.util.List;
@@ -45,7 +47,11 @@ public class DoctorAppointmentRecyclerAdapter extends RecyclerView.Adapter<Docto
             holder.time.setText(new DateFormatter(data.get(position).getDate()).getDateFormat1());
         } catch (ParseException e) {
             e.printStackTrace();
+        }catch (NullPointerException e){
+            e.printStackTrace();
         }
+
+        new ImageDownloader(holder.image,patient.getPhotoPath(),context);
 
     }
 
@@ -57,11 +63,13 @@ public class DoctorAppointmentRecyclerAdapter extends RecyclerView.Adapter<Docto
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView name,time;
+        ImageView image;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = binding.name;
             time = binding.time;
+            image = binding.image;
         }
     }
 
