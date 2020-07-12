@@ -59,7 +59,8 @@ module.exports.updateDoctorProfile = (req,res)=>{
                 "photo_path",
                 "created_at",
                 "updated_at",
-                "deleted_at"
+                "deleted_at",
+                "upi_id"
             ])
         })
     }).catch((err)=>{

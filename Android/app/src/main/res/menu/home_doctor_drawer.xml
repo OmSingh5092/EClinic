@@ -10,6 +10,10 @@
         android:title="Appointment Request"/>
 
     <item
+        android:id="@+id/payment"
+        android:title="Payment Details"/>
+
+    <item
         android:id="@+id/logout"
         android:title="Logout"/>
 

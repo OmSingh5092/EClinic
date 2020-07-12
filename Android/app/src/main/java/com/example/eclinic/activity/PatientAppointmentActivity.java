@@ -60,7 +60,7 @@ public class PatientAppointmentActivity extends AppCompatActivity implements Pay
         checkout.setKeyID(getResources().getString(R.string.razorpay_key_id));
         JSONObject data = new JSONObject();
         try{
-            data.put("amount", 200);
+            data.put("amount", doctor.getFeesGeneral());
             data.put("email", doctor.getEmail());
             data.put("contact", doctor.getPhoneNumber());
             data.put("method", "upi");

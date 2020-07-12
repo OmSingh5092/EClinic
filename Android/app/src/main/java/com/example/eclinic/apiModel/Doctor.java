@@ -33,6 +33,7 @@ public class Doctor {
     @Expose
     String photoPath;
 
+
     @SerializedName("category")
     @Expose
     String category;
@@ -40,6 +41,17 @@ public class Doctor {
     @SerializedName("about")
     @Expose
     String about;
+    @SerializedName("upi_id")
+    @Expose
+    String upiId;
+
+    public String getUpiId() {
+        return upiId;
+    }
+
+    public void setUpiId(String upiId) {
+        this.upiId = upiId;
+    }
 
     public String getAbout() {
         return about;
@@ -52,7 +64,7 @@ public class Doctor {
     @SerializedName("fees_priority")
     @Expose
     String feesPriority;
-    @SerializedName("fees_genera")
+    @SerializedName("fees_general")
     @Expose
     String feesGeneral;
 

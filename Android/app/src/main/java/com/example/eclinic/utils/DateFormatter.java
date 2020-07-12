@@ -20,7 +20,7 @@ public class DateFormatter {
     }
 
     public String getFullDate(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat(" dd-MM-yyyy EEE hh-mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat(" dd-MM-yyyy EEE hh:mm");
         return dateFormat.format(this.date);
     }
 }

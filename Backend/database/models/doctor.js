@@ -51,6 +51,9 @@ const doctor = sequelize.define('doctor',{
     fees_general:{
         type:Sequelize.INTEGER,
     },
+    upi_id:{
+        type:Sequelize.TEXT,
+    },
 
     //About
     about:{
