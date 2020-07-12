@@ -36,4 +36,11 @@ public class GeneralData {
     public static void setDoctors(List<Doctor> doctors) {
         GeneralData.doctors = doctors;
     }
+
+    public static  void reset(){
+        doctors= new ArrayList<>();
+        patients = new ArrayList<>();
+        appointments = new ArrayList<>();
+
+    }
 }

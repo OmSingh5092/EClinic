@@ -38,7 +38,7 @@ public class DoctorRecyclerAdapter extends RecyclerView.Adapter<DoctorRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.name.setText(data.get(position).getDoctorName());
-        holder.category.setText(data.get(position).getCategory());
+        holder.category.setText(data.get(position).getCategory()+"Specialist");
 
         new ImageDownloader(holder.imageView,data.get(position).getPhotoPath(),context);
     }

@@ -30,6 +30,7 @@ import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.ActivityPatientHomeBinding;
 import com.example.eclinic.databinding.RecyclerDoctorsBinding;
 import com.example.eclinic.utils.SharedPrefs;
+import com.example.eclinic.utils.SignOutHandler;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -110,11 +111,7 @@ public class PatientHomeActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if(item.getItemId() == R.id.logout){
-                    prefs.clearData();
-                    FirebaseAuth.getInstance().signOut();
-                    Intent i = new Intent(PatientHomeActivity.this,GetStartedActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(i);
+                    new SignOutHandler(PatientHomeActivity.this);
                 }else if(item.getItemId() == R.id.profile){
                     Intent i = new Intent(PatientHomeActivity.this,PatientProfileActivity.class);
                     startActivity(i);

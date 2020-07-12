@@ -15,10 +15,14 @@ public class DateFormatter {
         return dateFormat.format(this.date);
     }
     public String getTimeFormat(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh-mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm aa");
         return dateFormat.format(this.date);
     }
 
+    public String getDateFormat(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy EEE");
+        return dateFormat.format(this.date);
+    }
     public String getFullDate(){
         SimpleDateFormat dateFormat = new SimpleDateFormat(" dd-MM-yyyy EEE hh:mm");
         return dateFormat.format(this.date);

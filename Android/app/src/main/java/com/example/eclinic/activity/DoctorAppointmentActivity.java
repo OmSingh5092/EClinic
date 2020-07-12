@@ -137,7 +137,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
         binding.mode.setText(appointment.getInteractionMethod());
 
         if(appointment.isStatus()){
-            binding.date.setText(new DateFormatter(appointment.getDate()).getDateFormat1());
+            binding.date.setText(new DateFormatter(appointment.getDate()).getDateFormat());
             binding.time.setText(new DateFormatter(appointment.getDate()).getTimeFormat());
         }
 
@@ -149,7 +149,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
                 calendar.set(Calendar.HOUR_OF_DAY,i);
                 calendar.set(Calendar.MINUTE,i1);
-                binding.time.setText(new SimpleDateFormat("hh:mm").format(new Date(calendar.getTimeInMillis())));
+                binding.time.setText(new SimpleDateFormat("hh:mm aa").format(new Date(calendar.getTimeInMillis())));
             }
         },12,0,false);
 
@@ -159,7 +159,7 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
                 calendar.set(Calendar.YEAR,i);
                 calendar.set(Calendar.MONTH,i1);
                 calendar.set(Calendar.DAY_OF_MONTH,i2);
-                binding.date.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(calendar.getTimeInMillis())));
+                binding.date.setText(new SimpleDateFormat("dd-MM-yyyy EEE").format(new Date(calendar.getTimeInMillis())));
             }
         },2000,1,1);
 
