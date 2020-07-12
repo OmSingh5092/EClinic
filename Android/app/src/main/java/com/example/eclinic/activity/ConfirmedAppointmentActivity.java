@@ -14,6 +14,7 @@ import com.example.eclinic.adapters.PendingAppointmentRecyclerAdapter;
 import com.example.eclinic.apiControllers.AppointmentController;
 import com.example.eclinic.apiModel.Appointment;
 import com.example.eclinic.apiModel.AppointmentGetResponseModel;
+import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.ActivityConfirmedAppointmentBinding;
 import com.example.eclinic.utils.SharedPrefs;
 
@@ -52,6 +53,8 @@ public class ConfirmedAppointmentActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<AppointmentGetResponseModel> call, Response<AppointmentGetResponseModel> response) {
                 if(response.isSuccessful()){
+                    GeneralData.setAppointments(new ArrayList<>());
+                    GeneralData.setAppointments(response.body().getAppointments());
                     for(Appointment appointment:response.body().getAppointments()){
                         if(appointment.isStatus()){
                             appointmentList.add(appointment);
