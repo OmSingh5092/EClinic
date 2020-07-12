@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.eclinic.R;
 
-public class ConfirmedAppointments extends AppCompatActivity {
+public class ConfirmedAppointmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_confirmed_appointments);
+        setContentView(R.layout.activity_confirmed_appointment);
     }
 }

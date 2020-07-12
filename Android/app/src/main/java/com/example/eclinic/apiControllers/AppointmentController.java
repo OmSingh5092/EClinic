@@ -3,6 +3,7 @@ package com.example.eclinic.apiControllers;
 
 import com.example.eclinic.apiModel.Appointment;
 import com.example.eclinic.apiModel.AppointmentAddResponseModel;
+import com.example.eclinic.apiModel.AppointmentGetResponseModel;
 import com.example.eclinic.retrofit.RetrofitClient;
 
 import java.util.HashMap;
@@ -21,6 +22,11 @@ public class AppointmentController {
         body.put("interaction_method",appointment.getInteractionMethod());
 
         Call<AppointmentAddResponseModel> call = RetrofitClient.getClient().addAppointment(token,body);
+        call.enqueue(callback);
+    }
+
+    public static void getAppointment(String token, Callback<AppointmentGetResponseModel>callback){
+        Call<AppointmentGetResponseModel> call= RetrofitClient.getClient().getAppointment(token);
         call.enqueue(callback);
     }
 }

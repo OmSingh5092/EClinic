@@ -40,4 +40,11 @@ public class DoctorProfileController {
         Call<DoctorGetResponseModel> call = RetrofitClient.getClient().getDoctor(token);
         call.enqueue(callback);
     }
+
+    public static void getDoctorFromId(String token,int id,Callback<DoctorGetResponseModel> callback){
+        Map<String,String> body = new HashMap<>();
+        body.put("doctor_id",String.valueOf(id));
+        Call<DoctorGetResponseModel> call = RetrofitClient.getClient().getDoctorFromId(token,body);
+        call.enqueue(callback);
+    }
 }

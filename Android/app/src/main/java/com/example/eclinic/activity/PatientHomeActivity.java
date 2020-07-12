@@ -117,6 +117,9 @@ public class PatientHomeActivity extends AppCompatActivity {
                 }else if(item.getItemId() == R.id.profile){
                     Intent i = new Intent(PatientHomeActivity.this,PatientProfileActivity.class);
                     startActivity(i);
+                }else if(item.getItemId() == R.id.pending){
+                    Intent i = new Intent(PatientHomeActivity.this,PendingAppointments.class);
+                    startActivity(i);
                 }
                 return false;
             }

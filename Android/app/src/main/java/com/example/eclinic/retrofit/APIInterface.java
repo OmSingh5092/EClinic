@@ -17,6 +17,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -41,6 +42,8 @@ public interface APIInterface {
     Call<DoctorGetResponseModel> getDoctor(@Header("token") String token);
     @GET("doctor/getall")
     Call<DoctorAllGetResponseModel> getAllDoctor(@Header("token") String token);
+    @HTTP(method = "GET", path = "doctor/get", hasBody = true)
+    Call<DoctorGetResponseModel> getDoctorFromId(@Header("token")String token, @Body Map<String,String> body);
 
     @POST("appointment/add")
     Call<AppointmentAddResponseModel> addAppointment(@Header("token") String token, @Body Map<String,String> body);

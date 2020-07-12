@@ -30,6 +30,7 @@ module.exports=sequelize;
 require('./models/doctor')
 require('./models/appointment');
 require('./models/patient');
+require('./models/models');
 
 /*sequelize.sync({ force: true })
   .then(() => {
