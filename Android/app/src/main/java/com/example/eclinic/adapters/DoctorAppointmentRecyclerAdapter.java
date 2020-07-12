@@ -1,12 +1,14 @@
 package com.example.eclinic.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.eclinic.activity.DoctorAppointmentActivity;
 import com.example.eclinic.apiModel.Appointment;
 import com.example.eclinic.apiModel.Patient;
 import com.example.eclinic.data.GeneralData;
@@ -70,6 +72,15 @@ public class DoctorAppointmentRecyclerAdapter extends RecyclerView.Adapter<Docto
             name = binding.name;
             time = binding.time;
             image = binding.image;
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, DoctorAppointmentActivity.class);
+                    i.putExtra("appointmentIndex",getAdapterPosition());
+                    context.startActivity(i);
+                }
+            });
         }
     }
 

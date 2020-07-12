@@ -1,5 +1,6 @@
 package com.example.eclinic.data;
 
+import com.example.eclinic.apiModel.Appointment;
 import com.example.eclinic.apiModel.Doctor;
 import com.example.eclinic.apiModel.Patient;
 
@@ -10,6 +11,15 @@ public class GeneralData {
 
     private static List<Doctor> doctors= new ArrayList<>();
     private static  List<Patient> patients = new ArrayList<>();
+    public static  List<Appointment> appointments = new ArrayList<>();
+
+    public static List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public static void setAppointments(List<Appointment> appointments) {
+        GeneralData.appointments = appointments;
+    }
 
     public static List<Patient> getPatients() {
         return patients;

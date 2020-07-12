@@ -142,9 +142,9 @@ public class DoctorFormHandler {
 
 
     public void initialize(){
-        binding.category.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        binding.category.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View view, boolean b) {
+            public void onClick(View view) {
                 initCategoryPopOver();
             }
         });
@@ -241,6 +241,7 @@ public class DoctorFormHandler {
         String[] categoryList = context.getResources().getStringArray(R.array.doctor_category);
         for(String string: categoryList){
             menu.getMenu().add(100,id,id,string);
+            id++;
         }
 
         menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

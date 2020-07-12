@@ -76,6 +76,9 @@ public class DoctorHomeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<AppointmentGetResponseModel> call, Response<AppointmentGetResponseModel> response) {
                 if(response.isSuccessful()){
+                    GeneralData.setAppointments(new ArrayList<>());
+                    GeneralData.setAppointments(response.body().getAppointments());
+                    list = new ArrayList<>();
                     for(Appointment appointment:response.body().getAppointments()){
                         if(appointment.isStatus()){
                             list.add(appointment);
@@ -121,5 +124,11 @@ public class DoctorHomeActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         binding.getRoot().openDrawer(Gravity.LEFT);
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadData();
     }
 }

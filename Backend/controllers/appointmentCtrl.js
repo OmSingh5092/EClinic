@@ -22,6 +22,26 @@ module.exports.getAppointment = (req,res)=>{
     })
 }
 
+module.exports.updateAppointment = (req,res)=>{
+    const id = req.user.id;
+    const update = req.body;
+    console.log("Requested body",req.body);
+
+    return table.update(update,{where:{appointment_id:update.appointment_id},returning:true})
+    .then((updatedData)=>{
+        res.status(200).json({
+            success:true,
+            msg:"Updated Successfully"
+        })
+    }).catch((err)=>{
+        console.log(err);
+        res.status(500).json({
+            success:false,
+            error:err,
+        })
+    })
+}
+
 module.exports.getAppointmentDoctor = (req,res)=>{
     const id = req.user.id;
     //Here is will be of the patient

@@ -46,33 +46,17 @@ public class DoctorRequestActivity extends AppCompatActivity {
 
         prefs = new SharedPrefs(this);
 
-        loadPatientData();
+        loadData();
     }
 
-    void loadPatientData(){
-        PatientProfileController.getAllProfile(prefs.getToken(), new Callback<PatientAllGetResponseModel>() {
-            @Override
-            public void onResponse(Call<PatientAllGetResponseModel> call, Response<PatientAllGetResponseModel> response) {
-                if(response.isSuccessful()){
-                    GeneralData.setPatients(response.body().getPatients());
-                    loadData();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<PatientAllGetResponseModel> call, Throwable t) {
-
-            }
-        });
-
-
-    }
 
     void loadData(){
         AppointmentController.getAppointmentDoctor(prefs.getToken(), new Callback<AppointmentGetResponseModel>() {
             @Override
             public void onResponse(Call<AppointmentGetResponseModel> call, Response<AppointmentGetResponseModel> response) {
                 if(response.isSuccessful()){
+                    list = new ArrayList<>();
                     for(Appointment appointment:response.body().getAppointments()){
                         if(!appointment.isStatus()){
                             list.add(appointment);
@@ -101,5 +85,11 @@ public class DoctorRequestActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();;
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadData();
     }
 }
