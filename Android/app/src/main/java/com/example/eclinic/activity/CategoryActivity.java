@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Toast;
 
 import com.example.eclinic.R;
@@ -22,6 +24,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     String category;
     List<Doctor> list = new ArrayList<>();
+    List<Doctor> filteredList = new ArrayList<>();
 
     DoctorRecyclerAdapter adapter;
 
@@ -31,31 +34,62 @@ public class CategoryActivity extends AppCompatActivity {
         binding = ActivityCategoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         category = getIntent().getStringExtra("category");
+        binding.toolbar.setTitle(category);
+        setSupportActionBar(binding.toolbar);
 
         generateList();
         setUpRecyclerView();
 
-        getSupportActionBar().setTitle(category);
-
+        setUpSearch();
 
     }
 
     void generateList(){
         for(Doctor doctor: GeneralData.getDoctors()){
-            list.add(doctor);
+            if(doctor.getCategory().equals(category)){
+                list.add(doctor);
+            }
         }
+        filteredList = list;
     }
 
     void setUpRecyclerView(){
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new DoctorRecyclerAdapter(list,this);
+        adapter = new DoctorRecyclerAdapter(filteredList,this);
         binding.recyclerView.setAdapter(adapter);
+    }
+
+    void setUpSearch(){
+        binding.search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String text = editable.toString().toLowerCase();
+                filteredList = new ArrayList<>();
+                for(Doctor doctor: GeneralData.getDoctors()){
+                    if(doctor.getDoctorName().contains(text)){
+                        filteredList.add(doctor);
+                    }
+                }
+
+                adapter = new DoctorRecyclerAdapter(filteredList,CategoryActivity.this);
+                binding.recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         finish();
-        Toast.makeText(this, "Back", Toast.LENGTH_SHORT).show();
         return super.onSupportNavigateUp();
     }
 }

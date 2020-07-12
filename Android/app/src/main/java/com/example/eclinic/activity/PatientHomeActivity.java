@@ -9,12 +9,15 @@ import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.eclinic.R;
 import com.example.eclinic.adapters.CategoryRecyclerAdapter;
@@ -38,7 +41,7 @@ public class PatientHomeActivity extends AppCompatActivity {
     CategoryRecyclerAdapter categoryRecyclerAdapter;
     DoctorRecyclerAdapter doctorRecyclerAdapter;
 
-    List<Doctor> doctors = new ArrayList<>();
+    List<Doctor> filteredList = new ArrayList<>();
 
     SharedPrefs prefs;
 
@@ -55,6 +58,10 @@ public class PatientHomeActivity extends AppCompatActivity {
         loadData();
         setUpCategoryRecyclerView();
         handleDrawerMenu();
+
+        setUpSearch();
+
+
     }
 
     void loadData(){
@@ -64,6 +71,7 @@ public class PatientHomeActivity extends AppCompatActivity {
             public void onResponse(Call<DoctorAllGetResponseModel> call, Response<DoctorAllGetResponseModel> response) {
                 if(response.isSuccessful()){
                     Log.i("Data loaded",response.body().getData().toString());
+                    filteredList = response.body().getData();
                     GeneralData.setDoctors(response.body().getData());
                     setUpDoctorRecyclerView();
                 }else{
@@ -92,7 +100,7 @@ public class PatientHomeActivity extends AppCompatActivity {
 
     void setUpDoctorRecyclerView(){
         binding.recyclerDoctor.setLayoutManager(new LinearLayoutManager(this));
-        doctorRecyclerAdapter = new DoctorRecyclerAdapter(GeneralData.getDoctors(),this);
+        doctorRecyclerAdapter = new DoctorRecyclerAdapter(filteredList,this);
         binding.recyclerDoctor.setAdapter(doctorRecyclerAdapter);
     }
 
@@ -106,8 +114,39 @@ public class PatientHomeActivity extends AppCompatActivity {
                     Intent i = new Intent(PatientHomeActivity.this,GetStartedActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
+                }else if(item.getItemId() == R.id.profile){
+                    Intent i = new Intent(PatientHomeActivity.this,PatientProfileActivity.class);
+                    startActivity(i);
                 }
                 return false;
+            }
+        });
+    }
+
+    void setUpSearch(){
+        binding.search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String text = editable.toString().toLowerCase();
+                filteredList = new ArrayList<>();
+                for(Doctor doctor: GeneralData.getDoctors()){
+                    if(doctor.getDoctorName().contains(text)){
+                        filteredList.add(doctor);
+                    }
+                }
+
+                doctorRecyclerAdapter = new DoctorRecyclerAdapter(filteredList,PatientHomeActivity.this);
+                binding.recyclerDoctor.setAdapter(doctorRecyclerAdapter);
             }
         });
     }
