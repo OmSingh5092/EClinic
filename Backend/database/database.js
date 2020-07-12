@@ -38,3 +38,4 @@ sequelize.sync({ force: true })
 }).catch((err)=>{
     console.log(err);
 }) 
+ 

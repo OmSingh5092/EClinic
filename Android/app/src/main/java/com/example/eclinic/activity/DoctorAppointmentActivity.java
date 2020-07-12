@@ -82,12 +82,6 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
             }
         });
 
-        binding.newPrescription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new PdfDownloader(DoctorAppointmentActivity.this,appointment.getNewPrescriptionPath());
-            }
-        });
 
         binding.prescription.setOnClickListener(new View.OnClickListener() {
             @Override
