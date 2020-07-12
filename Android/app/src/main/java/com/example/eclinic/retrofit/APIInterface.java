@@ -1,5 +1,6 @@
 package com.example.eclinic.retrofit;
 
+import com.example.eclinic.apiModel.DoctorAllGetResponseModel;
 import com.example.eclinic.apiModel.DoctorGetResponseModel;
 import com.example.eclinic.apiModel.DoctorUpdateResponseModel;
 import com.example.eclinic.apiModel.PatientGetResponseModel;
@@ -36,4 +37,6 @@ public interface APIInterface {
     Call<DoctorUpdateResponseModel> updateDoctor(@Header("token") String token, @Body Map<String,String> body);
     @GET("doctor/get")
     Call<DoctorGetResponseModel> getDoctor(@Header("token") String token);
+    @GET("doctor/getall")
+    Call<DoctorAllGetResponseModel> getAllDoctor(@Header("token") String token);
 }

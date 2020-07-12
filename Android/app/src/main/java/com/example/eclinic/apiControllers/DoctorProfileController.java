@@ -1,6 +1,7 @@
 package com.example.eclinic.apiControllers;
 
 import com.example.eclinic.apiModel.Doctor;
+import com.example.eclinic.apiModel.DoctorAllGetResponseModel;
 import com.example.eclinic.apiModel.DoctorGetResponseModel;
 import com.example.eclinic.apiModel.DoctorUpdateResponseModel;
 import com.example.eclinic.retrofit.RetrofitClient;
@@ -26,6 +27,11 @@ public class DoctorProfileController {
         body.put("category",doctor.getCategory());
 
         Call<DoctorUpdateResponseModel> call = RetrofitClient.getClient().updateDoctor(token,body);
+        call.enqueue(callback);
+    }
+
+    public static void getAllDoctors(String token, Callback<DoctorAllGetResponseModel> callback){
+        Call<DoctorAllGetResponseModel> call = RetrofitClient.getClient().getAllDoctor(token);
         call.enqueue(callback);
     }
 
