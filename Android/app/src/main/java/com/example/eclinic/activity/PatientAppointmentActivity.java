@@ -2,6 +2,9 @@ package com.example.eclinic.activity;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +13,16 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.eclinic.R;
+import com.example.eclinic.apiControllers.AppointmentController;
 import com.example.eclinic.apiModel.Appointment;
+import com.example.eclinic.apiModel.AppointmentUpdateResponseModel;
 import com.example.eclinic.apiModel.Doctor;
 import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.ActivityPatientAppointmentBinding;
 import com.example.eclinic.utils.DateFormatter;
 import com.example.eclinic.utils.ImageDownloader;
+import com.example.eclinic.utils.PdfDownloader;
+import com.example.eclinic.utils.SharedPrefs;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
@@ -33,12 +40,16 @@ public class PatientAppointmentActivity extends AppCompatActivity implements Pay
 
     Checkout checkout;
 
+    SharedPrefs prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPatientAppointmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
+
+        prefs = new SharedPrefs(this);
 
         appointmentIndex = getIntent().getIntExtra("appointmentIndex",0);
         appointment = GeneralData.getAppointments().get(appointmentIndex);
@@ -53,6 +64,20 @@ public class PatientAppointmentActivity extends AppCompatActivity implements Pay
                 handlePayment();
             }
         });
+
+        binding.prescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PdfDownloader(PatientAppointmentActivity.this,appointment.getPrescriptionPath());
+            }
+        });
+
+        binding.newPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PdfDownloader(PatientAppointmentActivity.this,appointment.getNewPrescriptionPath());
+            }
+        });
     }
 
     void handlePayment(){
@@ -60,11 +85,11 @@ public class PatientAppointmentActivity extends AppCompatActivity implements Pay
         checkout.setKeyID(getResources().getString(R.string.razorpay_key_id));
         JSONObject data = new JSONObject();
         try{
-            data.put("amount", doctor.getFeesGeneral());
+            data.put("amount", Integer.valueOf(doctor.getFeesGeneral())*100);
             data.put("email", doctor.getEmail());
-            data.put("contact", doctor.getPhoneNumber());
+            data.put("contact", "8795625894");
             data.put("method", "upi");
-            data.put("_[flow]", "intent");
+            data.put("vpa", doctor.getUpiId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -114,18 +139,32 @@ public class PatientAppointmentActivity extends AppCompatActivity implements Pay
         return super.onSupportNavigateUp();
     }
 
-    /*@Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(checkout!=null){
             checkout.onActivityResult(requestCode,resultCode,data);
         }
-    }  */
+    }
 
     @Override
     public void onPaymentSuccess(String s) {
 
-        Toast.makeText(this, "Payment Successfull", Toast.LENGTH_SHORT).show();
+        appointment.setPaymentStatus(true);
+
+        AppointmentController.updateAppointment(appointment, prefs.getToken(), new Callback<AppointmentUpdateResponseModel>() {
+            @Override
+            public void onResponse(Call<AppointmentUpdateResponseModel> call, Response<AppointmentUpdateResponseModel> response) {
+                Toast.makeText(PatientAppointmentActivity.this, "Payment Successfull", Toast.LENGTH_SHORT).show();
+                binding.pay.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<AppointmentUpdateResponseModel> call, Throwable t) {
+
+            }
+        });
+
 
     }
 

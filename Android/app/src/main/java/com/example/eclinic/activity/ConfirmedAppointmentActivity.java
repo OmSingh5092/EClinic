@@ -38,8 +38,6 @@ public class ConfirmedAppointmentActivity extends AppCompatActivity {
         prefs = new SharedPrefs(this);
 
         loadData();
-
-
     }
 
     void initializeRecyclerView(){
@@ -75,5 +73,11 @@ public class ConfirmedAppointmentActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        loadData();
     }
 }

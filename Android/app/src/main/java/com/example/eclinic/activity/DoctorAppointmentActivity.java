@@ -23,6 +23,8 @@ import com.example.eclinic.apiModel.AppointmentUpdateResponseModel;
 import com.example.eclinic.data.GeneralData;
 import com.example.eclinic.databinding.ActivityDoctorAppointmentBinding;
 import com.example.eclinic.utils.DateFormatter;
+import com.example.eclinic.utils.PdfDownloader;
+import com.example.eclinic.utils.PermissionHandler;
 import com.example.eclinic.utils.SharedPrefs;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -57,6 +59,8 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
 
         prefs = new SharedPrefs(this);
 
+        new PermissionHandler(this).askStoragePermissions();
+
         calendar = Calendar.getInstance();
 
         try {
@@ -75,6 +79,20 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
                 i.setType("application/pdf");
                 i.addCategory(Intent.CATEGORY_OPENABLE);
                 startActivityForResult(i,100);
+            }
+        });
+
+        binding.newPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PdfDownloader(DoctorAppointmentActivity.this,appointment.getNewPrescriptionPath());
+            }
+        });
+
+        binding.prescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PdfDownloader(DoctorAppointmentActivity.this,appointment.getPrescriptionPath());
             }
         });
 
@@ -158,6 +176,8 @@ public class DoctorAppointmentActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
+
 
     }
 

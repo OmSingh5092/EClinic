@@ -125,6 +125,7 @@ public class BookAppointmentActivity extends AppCompatActivity {
 
     void uploadPdf(Uri uri){
         Snackbar snackbar = Snackbar.make(binding.getRoot(),"Uploading..",Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         FirebaseAuth auth = FirebaseAuth.getInstance();
         storage.getReference().child("prescription").child(auth.getUid())
